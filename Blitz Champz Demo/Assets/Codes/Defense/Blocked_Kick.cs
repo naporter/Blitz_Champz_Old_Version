@@ -9,7 +9,9 @@ public class Blocked_Kick : Defensive_Card
     {
         
     }
-
+	public override void Show() {
+        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/blocked_kick");
+    }
     // Update is called once per frame
     void Update()
     {

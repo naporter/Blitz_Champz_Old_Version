@@ -9,7 +9,9 @@ public class Interception : Defensive_Card
     {
         
     }
-
+	public override void Show() {
+        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/interception");
+    }
     // Update is called once per frame
     void Update()
     {

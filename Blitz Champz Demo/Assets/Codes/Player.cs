@@ -17,7 +17,8 @@ public class Player : MonoBehaviour {
 	public void update_score(int change) {
 		score += change;
 	}
-	public void draw(Deck draw_deck) {
+	public void draw() {
+		Deck draw_deck = table.draw_deck;
 		if (draw_deck.draw_deck.Count > 0 && table.current_player == this) {
 			GameObject new_card = draw_deck.Draw(this);
 			new_card.GetComponent<Card>().SetOwner(this);
@@ -36,7 +37,9 @@ public class Player : MonoBehaviour {
 				hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * i;
 				hand[i].GetComponentInChildren<TextMeshPro>().sortingOrder = 2 * i + 1;
 				hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * (hand.Count - i));
-				
+				if (this == table.pov_player) {
+					hand[i].GetComponent<Card>().Show();
+				}
 			}
 		}
 		else {
@@ -46,6 +49,9 @@ public class Player : MonoBehaviour {
 				hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * (hand.Count - i);
 				hand[i].GetComponentInChildren<TextMeshPro>().sortingOrder = 2 * (hand.Count - i) + 1;
 				hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * i);
+				if (this == table.pov_player) {
+					hand[i].GetComponent<Card>().Show();
+				}
 			}
 		}
 	}

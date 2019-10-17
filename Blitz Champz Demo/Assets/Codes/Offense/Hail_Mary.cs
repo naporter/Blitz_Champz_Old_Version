@@ -12,7 +12,9 @@ public class Hail_Mary : Offensive_Card
 		pass = false;
 		run = false;        
     }
-
+    public override void Show() {
+        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/hail_mary");
+    }
     // Update is called once per frame
     void Update()
     {

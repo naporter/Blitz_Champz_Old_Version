@@ -45,19 +45,28 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>     <Compile Include="Assets\Codes\Card.cs" />
+     <Compile Include="Assets\Codes\Continuation\Blitz.cs" />
+     <Compile Include="Assets\Codes\Continuation\End_Of_Quarter1.cs" />
+     <Compile Include="Assets\Codes\Continuation\End_Of_Quarter2.cs" />
+     <Compile Include="Assets\Codes\Continuation\End_Of_Quarter3.cs" />
+     <Compile Include="Assets\Codes\Continuation\End_Of_Quarter4.cs" />
+     <Compile Include="Assets\Codes\Continuation\First_Down.cs" />
+     <Compile Include="Assets\Codes\Continuation\Five_Yard_Run.cs" />
+     <Compile Include="Assets\Codes\Continuation\Fumble.cs" />
+     <Compile Include="Assets\Codes\Continuation\Pass_Completion.cs" />
      <Compile Include="Assets\Codes\Continuation_Card.cs" />
      <Compile Include="Assets\Codes\Deck.cs" />
      <Compile Include="Assets\Codes\Defense\Blocked_Kick.cs" />
-     <Compile Include="Assets\Codes\Defense\Defensive_Card.cs" />
      <Compile Include="Assets\Codes\Defense\Interception.cs" />
      <Compile Include="Assets\Codes\Defense\Tackle.cs" />
+     <Compile Include="Assets\Codes\Defensive_Card.cs" />
      <Compile Include="Assets\Codes\Offense\Conversion.cs" />
      <Compile Include="Assets\Codes\Offense\Extra_Point.cs" />
      <Compile Include="Assets\Codes\Offense\Field_Goal.cs" />
      <Compile Include="Assets\Codes\Offense\Hail_Mary.cs" />
-     <Compile Include="Assets\Codes\Offense\Offensive_Card.cs" />
      <Compile Include="Assets\Codes\Offense\Passing_TD.cs" />
      <Compile Include="Assets\Codes\Offense\Rushing_TD.cs" />
+     <Compile Include="Assets\Codes\Offensive_Card.cs" />
      <Compile Include="Assets\Codes\Player.cs" />
      <Compile Include="Assets\Codes\Table.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
@@ -79,31 +88,31 @@
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>B:/caleb/Documents/Blitz Champz Demo/Blitz Champz Demo/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>C:/Users/caleb/Documents/Blitz_Champz/Blitz Champz Demo/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>B:/caleb/Documents/Blitz Champz Demo/Blitz Champz Demo/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>C:/Users/caleb/Documents/Blitz_Champz/Blitz Champz Demo/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>B:/caleb/Documents/Blitz Champz Demo/Blitz Champz Demo/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/caleb/Documents/Blitz_Champz/Blitz Champz Demo/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>B:/caleb/Documents/Blitz Champz Demo/Blitz Champz Demo/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Users/caleb/Documents/Blitz_Champz/Blitz Champz Demo/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>B:/caleb/Documents/Blitz Champz Demo/Blitz Champz Demo/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>C:/Users/caleb/Documents/Blitz_Champz/Blitz Champz Demo/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>B:/caleb/Documents/Blitz Champz Demo/Blitz Champz Demo/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>C:/Users/caleb/Documents/Blitz_Champz/Blitz Champz Demo/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>B:/caleb/Documents/Blitz Champz Demo/Blitz Champz Demo/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>C:/Users/caleb/Documents/Blitz_Champz/Blitz Champz Demo/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>B:/caleb/Documents/Blitz Champz Demo/Blitz Champz Demo/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/caleb/Documents/Blitz_Champz/Blitz Champz Demo/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>B:/caleb/Documents/Blitz Champz Demo/Blitz Champz Demo/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>C:/Users/caleb/Documents/Blitz_Champz/Blitz Champz Demo/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

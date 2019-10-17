@@ -8,7 +8,9 @@ public class Defensive_Card : Card {
 	void Start () {
 		
 	}
-	
+	protected override void Play() {
+		AdvanceTurn();
+	}
 	// Update is called once per frame
 	void Update () {
 		
