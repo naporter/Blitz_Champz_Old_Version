@@ -12,7 +12,9 @@ public class Passing_TD : Offensive_Card
 		pass = true;
 		run = false;
     }
-
+	public override void Show() {
+        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/passing_td");
+    }
     // Update is called once per frame
     void Update()
     {

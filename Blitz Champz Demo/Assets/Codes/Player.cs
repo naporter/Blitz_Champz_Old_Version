@@ -36,7 +36,9 @@ public class Player : MonoBehaviour {
 				hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * i;
 				hand[i].GetComponentInChildren<TextMeshPro>().sortingOrder = 2 * i + 1;
 				hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * (hand.Count - i));
-				
+				if (this == table.pov_player) {
+					hand[i].GetComponent<Card>().Show();
+				}
 			}
 		}
 		else {
@@ -46,6 +48,9 @@ public class Player : MonoBehaviour {
 				hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * (hand.Count - i);
 				hand[i].GetComponentInChildren<TextMeshPro>().sortingOrder = 2 * (hand.Count - i) + 1;
 				hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * i);
+				if (this == table.pov_player) {
+					hand[i].GetComponent<Card>().Show();
+				}
 			}
 		}
 	}

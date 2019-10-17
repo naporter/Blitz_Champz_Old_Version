@@ -12,6 +12,7 @@ public class Table : MonoBehaviour
         discard.Add(card);
 
     }
+    public Player pov_player;
     public Player player1;
     public Player player2;
     public Text p1;

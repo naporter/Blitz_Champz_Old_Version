@@ -25,6 +25,7 @@ public class Card : MonoBehaviour {
 			owner.order_cards();
 			this.owner = null;
 			Destroy(GetComponent<BoxCollider>());
+			Show();
 		}
 	}
 	private void OnMouseUpAsButton() {
@@ -33,6 +34,11 @@ public class Card : MonoBehaviour {
 			owner.table.AdvanceTurn(owner);
 			this.Discard();
 		}
+	}
+	public void Hide() {
+		gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/back");
+	}
+	public virtual void Show() {
 	}
 	void OnMouseEnter() {
 		if (owner != null && owner == owner.table.current_player) {

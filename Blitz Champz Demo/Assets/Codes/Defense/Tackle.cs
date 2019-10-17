@@ -9,7 +9,9 @@ public class Tackle : Defensive_Card
     {
         
     }
-
+	public override void Show() {
+        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/tackle");
+    }
     // Update is called once per frame
     void Update()
     {

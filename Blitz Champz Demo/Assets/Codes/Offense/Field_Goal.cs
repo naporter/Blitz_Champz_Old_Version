@@ -11,7 +11,9 @@ public class Field_Goal : Offensive_Card
 		pass = false;
 		run = false;
 	}
-
+	public override void Show() {
+        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/field_goal");
+    }
 	void Update () {
 	
 	}
