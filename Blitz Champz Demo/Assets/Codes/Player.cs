@@ -32,7 +32,7 @@ public class Player : MonoBehaviour {
 		if (right) {
 			
 			for (int i = 0; i < hand.Count; i++) {
-				Vector3 adjustment = new Vector3(-1 * 1f * i, 0.0f, 0.0f);
+				Vector3 adjustment = new Vector3(-1 * 0.5f * i, 0.0f, 0.0f);
 				hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * i;
 				hand[i].GetComponentInChildren<TextMeshPro>().sortingOrder = 2 * i + 1;
 				hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * (hand.Count - i));
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour {
 		else {
 			
 			for (int i = 0; i < hand.Count; i++) {
-				Vector3 adjustment = new Vector3(1f * i, 0.0f, 0.0f);
+				Vector3 adjustment = new Vector3(0.5f * i, 0.0f, 0.0f);
 				hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * (hand.Count - i);
 				hand[i].GetComponentInChildren<TextMeshPro>().sortingOrder = 2 * (hand.Count - i) + 1;
 				hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * i);
