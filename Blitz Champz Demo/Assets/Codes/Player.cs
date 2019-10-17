@@ -17,7 +17,8 @@ public class Player : MonoBehaviour {
 	public void update_score(int change) {
 		score += change;
 	}
-	public void draw(Deck draw_deck) {
+	public void draw() {
+		Deck draw_deck = table.draw_deck;
 		if (draw_deck.draw_deck.Count > 0 && table.current_player == this) {
 			GameObject new_card = draw_deck.Draw(this);
 			new_card.GetComponent<Card>().SetOwner(this);

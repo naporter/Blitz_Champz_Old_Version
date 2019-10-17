@@ -26,20 +26,20 @@ public class Table : MonoBehaviour
         current_player = player1;
         for (int i = 0; i < 5; i++) {
             current_player = player2;
-            player2.draw(draw_deck);
+            player2.draw();
             current_player = player1;
-            player1.draw(draw_deck);
+            player1.draw();
         }
-        player1.draw(draw_deck);
+        player1.draw();
     }
     public void AdvanceTurn(Player player) {
         Update_Scores();
         if (player == player1) {
             current_player = player2;
-            player2.draw(draw_deck);
+            player2.draw();
         } else {
             current_player = player1;
-            player1.draw(draw_deck);
+            player1.draw();
         }
     }
     public void Update_Scores() {

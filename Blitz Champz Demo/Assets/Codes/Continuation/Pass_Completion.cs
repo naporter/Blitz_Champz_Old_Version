@@ -9,6 +9,9 @@ public class Pass_Completion : Continuation_Card
     {
         
     }
+    protected override void Play() {
+        owner.draw();
+    }
 	public override void Show() {
         gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/pass_completion");
     }

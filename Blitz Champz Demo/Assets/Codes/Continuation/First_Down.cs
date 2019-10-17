@@ -9,6 +9,10 @@ public class First_Down : Continuation_Card
     {
         
     }
+    protected override void Play() {
+        owner.draw();
+        owner.draw();
+    }
 	public override void Show() {
         gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/first_down");
     }

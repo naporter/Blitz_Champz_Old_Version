@@ -9,6 +9,9 @@ public class Five_Yard_Run : Continuation_Card
     {
         
     }
+    protected override void Play() {
+        owner.draw();
+    }
 	public override void Show() {
         gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/5_yard_run");
     }

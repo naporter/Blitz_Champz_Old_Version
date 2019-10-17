@@ -28,10 +28,12 @@ public class Card : MonoBehaviour {
 			Show();
 		}
 	}
+	public void AdvanceTurn() {
+		owner.table.AdvanceTurn(owner);
+	}
 	private void OnMouseUpAsButton() {
 		if (owner != null && owner.table.current_player == owner) {
 			this.Play();
-			owner.table.AdvanceTurn(owner);
 			this.Discard();
 		}
 	}
