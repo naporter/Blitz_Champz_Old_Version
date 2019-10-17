@@ -100,6 +100,7 @@ public class Deck : MonoBehaviour
             GameObject new_end_of_quarter4 = Instantiate(end_of_quarter4, deck_position, transform.rotation);
             draw_deck.Add(new_end_of_quarter4);
         }
+        gameObject.GetComponent<Transform>().position = gameObject.transform.position + new Vector3(0f, 0f, -2);
     }
     
     public GameObject Draw(Player a) {
@@ -112,6 +113,9 @@ public class Deck : MonoBehaviour
         draw_deck.RemoveAt(random_num);
         return drawn_card;
     }
+    private void OnMouseUpAsButton() {
+
+	}
     void Update()
     {
         

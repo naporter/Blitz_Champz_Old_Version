@@ -15,20 +15,43 @@ public class Card : MonoBehaviour {
 
 	public void Discard () {
 		if (this.owner != null) {
+			for (int i = 0; i < owner.hand.Count; i++) {
+				owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
+			}
 			gameObject.GetComponent<Transform>().position = new Vector3(-1f, 0f, 0f);
 			gameObject.GetComponentInChildren<TextMeshPro>().SetText("None" + "\nDiscarded");
 			owner.table.Discard(gameObject);
 			owner.remove(gameObject);
 			owner.order_cards();
 			this.owner = null;
-			
+			Destroy(GetComponent<BoxCollider>());
 		}
 	}
 	private void OnMouseUpAsButton() {
-		if (owner.table.current_player == owner) {
+		if (owner != null && owner.table.current_player == owner) {
 			this.Play();
 			owner.table.AdvanceTurn(owner);
 			this.Discard();
+		}
+	}
+	void OnMouseEnter() {
+		if (owner != null && owner == owner.table.current_player) {
+			gameObject.transform.position += new Vector3(0f, +0.5f, 0f);
+			gameObject.GetComponent<SpriteRenderer>().sortingOrder +=20;
+			for (int i = 0; i < owner.hand.Count; i++) {
+				if (owner.hand[i] != gameObject) {
+					owner.hand[i].GetComponent<SpriteRenderer>().color = Color.gray;
+				}
+			}
+		}
+	}
+	void OnMouseExit() {
+		if (owner != null && owner == owner.table.current_player) {
+			gameObject.transform.position += new Vector3(0f, -0.5f, 0f);
+			gameObject.GetComponent<SpriteRenderer>().sortingOrder -=20;
+			for (int i = 0; i < owner.hand.Count; i++) {
+				owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
+			}
 		}
 	}
 	protected virtual void Play () {
