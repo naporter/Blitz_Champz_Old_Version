@@ -101,7 +101,7 @@ public class Deck : MonoBehaviour
             draw_deck.Add(new_end_of_quarter4);
         }
         for (int a = 0; a < draw_deck.Count; a++) {
-            draw_deck[a].GetComponent<Card>().Hide();
+            //draw_deck[a].GetComponent<Card>().Hide();
         }
         gameObject.GetComponent<Transform>().position = gameObject.transform.position + new Vector3(0f, 0f, -2);
     }

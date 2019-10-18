@@ -6,11 +6,10 @@ using TMPro;
 public class Player : MonoBehaviour {
 	public int score;
 	public List<GameObject> hand;
+	public List<GameObject> field;
 	public Table table;
 	public bool right = false;
 	public bool drew = false;
-	List<GameObject> field;
-	// Use this for initialization
 	void Start () {
 		score = 0;
 		if (this.transform.position.x > 0) {right = true;}
@@ -57,6 +56,5 @@ public class Player : MonoBehaviour {
 		}
 	}
 	void Update () {
-		
 	}
 }

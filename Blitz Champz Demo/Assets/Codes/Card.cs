@@ -18,6 +18,7 @@ public class Card : MonoBehaviour {
 			for (int i = 0; i < owner.hand.Count; i++) {
 				owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
 			}
+			owner.table.last_card = null;
 			gameObject.GetComponent<Transform>().position = new Vector3(-1f, 0f, 0f);
 			gameObject.GetComponentInChildren<TextMeshPro>().SetText("None" + "\nDiscarded");
 			owner.table.Discard(gameObject);
@@ -64,7 +65,6 @@ public class Card : MonoBehaviour {
 	}
 	protected virtual void Play () {
 	}
-	// Update is called once per frame
 	void Update () {
 		
 	}
