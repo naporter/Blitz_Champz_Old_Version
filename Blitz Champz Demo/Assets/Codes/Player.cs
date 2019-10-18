@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
 	public List<GameObject> hand;
 	public Table table;
 	public bool right = false;
+	public bool drew = false;
 	List<GameObject> field;
 	// Use this for initialization
 	void Start () {
@@ -55,7 +56,6 @@ public class Player : MonoBehaviour {
 			}
 		}
 	}
-	// Update is called once per frame
 	void Update () {
 		
 	}

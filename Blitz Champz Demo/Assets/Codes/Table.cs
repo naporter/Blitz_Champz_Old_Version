@@ -37,9 +37,11 @@ public class Table : MonoBehaviour
         if (player == player1) {
             current_player = player2;
             player2.draw();
+            player2.drew = false;
         } else {
             current_player = player1;
             player1.draw();
+            player1.drew = false;
         }
     }
     public void Update_Scores() {
