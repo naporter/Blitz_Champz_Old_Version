@@ -36,8 +36,6 @@ public class Table : MonoBehaviour
     }
     public void AdvanceTurn(Player player) {
         Update_Scores();
-        if (last_card) {
-        }
         current = current.Next ?? current.List.First;
         current_player = current.Value;
         current_player.draw();
