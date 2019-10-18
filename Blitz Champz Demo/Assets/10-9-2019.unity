@@ -153,6 +153,7 @@ MonoBehaviour:
   hand: []
   table: {fileID: 1681388873}
   right: 0
+  drew: 0
 --- !u!4 &167091281
 Transform:
   m_ObjectHideFlags: 0
@@ -161,7 +162,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 167091278}
   m_LocalRotation: {x: -0, y: -0, z: 0.70957077, w: 0.70463425}
-  m_LocalPosition: {x: 8, y: -3.8, z: 0}
+  m_LocalPosition: {x: 8, y: -4.4, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -758,6 +759,7 @@ MonoBehaviour:
   hand: []
   table: {fileID: 1681388873}
   right: 0
+  drew: 0
 --- !u!4 &1888975800
 Transform:
   m_ObjectHideFlags: 0
@@ -766,7 +768,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1888975796}
   m_LocalRotation: {x: -0, y: -0, z: 0.70684755, w: 0.707366}
-  m_LocalPosition: {x: -8, y: -3.8, z: 0}
+  m_LocalPosition: {x: -8, y: -4.4, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
