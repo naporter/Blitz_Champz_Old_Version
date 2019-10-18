@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Offensive_Card : Card {
 	protected int value;
-	protected bool kick = false;
-	protected bool pass = false;
-	protected bool run = false;
+	public bool kick = false;
+	public bool pass = false;
+	public bool run = false;
 	void Start() {
 	}
 	protected override void Play() {
@@ -32,7 +32,7 @@ public class Offensive_Card : Card {
 		Show();
 		AdvanceTurn();
 	}
-	protected void Remove() { //remove card from the field and discard it thus removing points from that player
+	public void Remove() { //remove card from the field and discard it thus removing points from that player
 		owner.update_score((-1) * value);
 		Discard();
 	}

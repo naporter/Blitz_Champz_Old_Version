@@ -11,7 +11,7 @@ public class Table : MonoBehaviour
         card.GetComponent<SpriteRenderer>().sortingOrder = discard.Count;
         discard.Add(card);
     }
-    public Card last_card;
+    public Offensive_Card last_card;
     public Player pov_player;
     public Player player1;
     public Player player2;
