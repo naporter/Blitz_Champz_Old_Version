@@ -30,7 +30,7 @@ public class Card : MonoBehaviour {
 		}
 	}
 	public void AdvanceTurn() {
-		owner.table.AdvanceTurn(owner);
+		owner.table.AdvanceTurn();
 	}
 	private void OnMouseUpAsButton() {
 		if (owner != null && owner.table.current_player == owner) {

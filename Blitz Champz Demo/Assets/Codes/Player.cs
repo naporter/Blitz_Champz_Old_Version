@@ -9,7 +9,6 @@ public class Player : MonoBehaviour {
 	public List<GameObject> field;
 	public Table table;
 	public bool right = false;
-	public bool drew = false;
 	void Start () {
 		score = 0;
 		if (this.transform.position.x > 0) {right = true;}
@@ -20,6 +19,7 @@ public class Player : MonoBehaviour {
 	public void draw() {
 		Deck draw_deck = table.draw_deck;
 		if (draw_deck.draw_deck.Count > 0 && table.current_player == this) {
+			Debug.Log("if (draw_deck.draw_deck.Count > 0 && table.current_player == this)");
 			GameObject new_card = draw_deck.Draw(this);
 			new_card.GetComponent<Card>().SetOwner(this);
 			hand.Add(new_card);

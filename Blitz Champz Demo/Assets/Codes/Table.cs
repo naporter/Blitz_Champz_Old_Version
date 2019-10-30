@@ -22,36 +22,41 @@ public class Table : MonoBehaviour
     // Start is called before the first frame update
     public LinkedList<Player> order = new LinkedList<Player>();
     void Start() {
+        create_deck();
         order.AddLast(player1);
         order.AddLast(player2);
         current = order.First;
         current_player = player1;
-        for (int i = 0; i < 5; i++) {
-            current_player = player2;
-            player2.draw();
-            current_player = player1;
-            player1.draw();
-        }
-        player1.draw();
+        StartCoroutine(Wait_For_Deck());
     }
-    public void AdvanceTurn(Player player) {
+
+    IEnumerator Wait_For_Deck() {
+        yield return new WaitUntil(() => draw_deck.draw_deck.Count == 100);
+        Debug.Log("Deck == 100 " + draw_deck.draw_deck.Count);
+        initial_deal();
+    }
+    private void create_deck() {
+        Debug.Log("Deck start");
+        GameObject deck = Resources.Load("Prefabs/deck") as GameObject;
+        GameObject new_deck = Instantiate(deck, new Vector3(1.45f, 0f, 1f), transform.rotation);
+        draw_deck = new_deck.GetComponent<Deck>();
+        Debug.Log("Deck done");
+    }
+    public void initial_deal() {
+        Debug.Log("Dealing start");
+        Debug.Log(draw_deck.draw_deck.Count);
+        current = current.List.Last;
+        for (int i = 0; i < 5 * order.Count; i++) {
+            AdvanceTurn();
+        }
+        AdvanceTurn();
+        Debug.Log("Dealing done");
+    }
+    public void AdvanceTurn() {
         Update_Scores();
         current = current.Next ?? current.List.First;
         current_player = current.Value;
         current_player.draw();
-        current_player.drew = false;
-
-        /*
-        if (player == player1) {
-            current_player = player2;
-            player2.draw();
-            player2.drew = false;
-        } else {
-            current_player = player1;
-            player1.draw();
-            player1.drew = false;
-        }
-        */
     }
     public void Update_Scores() {
         p1.text = (player1.score).ToString();
