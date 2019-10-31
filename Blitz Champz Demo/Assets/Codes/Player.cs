@@ -9,9 +9,18 @@ public class Player : MonoBehaviour {
 	public List<GameObject> field;
 	public Table table;
 	public bool right = false;
+	public bool up = false;
+	private Vector3 x_adjustment;
+	private Vector3 y_adjustment;
 	void Start () {
 		score = 0;
-		if (this.transform.position.x > 0) {right = true;}
+		if (this.transform.position.x > 0) {
+			right = true;
+		}
+		if (this.transform.position.y > 0) {
+			up = true;
+			gameObject.transform.rotation = Quaternion.Euler(0,0,180f);
+		}
 	}
 	public void update_score(int change) {
 		score += change;
@@ -29,7 +38,13 @@ public class Player : MonoBehaviour {
 	public void remove(GameObject card) {
 		hand.Remove(card);
 	}
+	public void stack_cards() {
+		for (int i = 0; i < hand.Count; i++) {
+			hand[i].transform.position = gameObject.transform.position;
+		}
+	}
 	public void order_cards() {
+		
 		if (right) {
 			
 			for (int i = 0; i < hand.Count; i++) {

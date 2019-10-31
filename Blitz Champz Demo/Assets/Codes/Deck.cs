@@ -102,7 +102,7 @@ public class Deck : MonoBehaviour
             draw_deck.Add(new_end_of_quarter4);
         }
         for (int a = 0; a < draw_deck.Count; a++) {
-            draw_deck[a].GetComponent<Card>().Hide();
+            //draw_deck[a].GetComponent<Card>().Hide();
         }
         gameObject.GetComponent<Transform>().position = gameObject.transform.position + new Vector3(0f, 0f, -2);
         ready = true;
@@ -113,10 +113,6 @@ public class Deck : MonoBehaviour
         Debug.Log("Deck draw called");
         int random_num = Random.Range(0, draw_deck.Count);
         GameObject drawn_card = draw_deck[random_num];
-    //    drawn_card.GetComponent<Card>().SetOwner(a);
-//        Vector3 adjustment = new Vector3(1.5f * count, 0.0f, 0.0f);
-//        if (a.transform.position.x > 0) {adjustment = new Vector3(-1 * 1.5f * count, 0.0f, 0.0f);}
-//        drawn_card.GetComponent<Transform>().position = a.transform.position + adjustment;
         draw_deck.RemoveAt(random_num);
         return drawn_card;
     }
