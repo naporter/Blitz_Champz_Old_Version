@@ -21,6 +21,7 @@ public class Table : MonoBehaviour
     public Text p1;
     public Text p2;
     public Player current_player;
+    private bool reversed = false;
     LinkedListNode<Player> current;
     public LinkedList<Player> order = new LinkedList<Player>();
     void Start() {
@@ -82,9 +83,16 @@ public class Table : MonoBehaviour
     public void AdvanceTurn() {
         //Update_Scores();
         current_player.stack_cards();
-        current = current.Next ?? current.List.First;
+        if (reversed) {
+            current = current.Previous ?? current.List.Last;
+        } else {
+            current = current.Next ?? current.List.First;
+        }
         current_player = current.Value;
         current_player.draw();
+    }
+    public void Reverse() {
+        reversed = !reversed;
     }
     public void Update_Scores() {
         p1.text = (player1.score).ToString();

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2738929773025705939}
   - component: {fileID: 879299047832370492}
-  - component: {fileID: -5949140020971568914}
+  - component: {fileID: -1012605173626441901}
   - component: {fileID: -1038924935263786901}
   m_Layer: 0
   m_Name: end_of_quarter3
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-5949140020971568914
+--- !u!114 &-1012605173626441901
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,10 +91,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1543638790031579193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 003126f27590dbd4da1348d85e0241e2, type: 3}
+  m_Script: {fileID: 11500000, guid: ca640e7eee122e748ba0b6af54df4e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  spriteName: Cards/end_of_quarter3
 --- !u!65 &-1038924935263786901
 BoxCollider:
   m_ObjectHideFlags: 0

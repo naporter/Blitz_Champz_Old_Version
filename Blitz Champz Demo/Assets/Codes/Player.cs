@@ -36,6 +36,7 @@ public class Player : MonoBehaviour {
 		}
 	}
 	public void remove(GameObject card) {
+		field.Remove(card);
 		hand.Remove(card);
 	}
 	public void stack_cards() {

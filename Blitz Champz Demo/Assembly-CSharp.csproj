@@ -46,10 +46,7 @@
   </PropertyGroup>
   <ItemGroup>     <Compile Include="Assets\Codes\Card.cs" />
      <Compile Include="Assets\Codes\Continuation\Blitz.cs" />
-     <Compile Include="Assets\Codes\Continuation\End_Of_Quarter1.cs" />
-     <Compile Include="Assets\Codes\Continuation\End_Of_Quarter2.cs" />
-     <Compile Include="Assets\Codes\Continuation\End_Of_Quarter3.cs" />
-     <Compile Include="Assets\Codes\Continuation\End_Of_Quarter4.cs" />
+     <Compile Include="Assets\Codes\Continuation\End_Of_Quarter.cs" />
      <Compile Include="Assets\Codes\Continuation\First_Down.cs" />
      <Compile Include="Assets\Codes\Continuation\Five_Yard_Run.cs" />
      <Compile Include="Assets\Codes\Continuation\Fumble.cs" />
