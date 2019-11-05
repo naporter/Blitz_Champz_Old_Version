@@ -627,7 +627,7 @@ MonoBehaviour:
   draw_deck: {fileID: 0}
   discard: []
   last_card: {fileID: 0}
-  player_count: 4
+  player_count: 3
   pov_player: {fileID: 0}
   player1: {fileID: 0}
   player2: {fileID: 0}
