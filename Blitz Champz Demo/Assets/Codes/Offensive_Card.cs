@@ -18,15 +18,20 @@ public class Offensive_Card : Card {
 		}
 		owner.update_score(value);
 		Vector3 adjustment;
-		if (owner.transform.position.x > 0) { 
+		if (owner.right) { 
 			gameObject.GetComponent<SpriteRenderer>().sortingOrder = owner.field.Count;
 			adjustment = new Vector3(-1.75f + -1 * 0.25f * owner.field.Count, 0, 0.0f);
+			gameObject.transform.position = owner.transform.position + adjustment + Vector3.Scale(transform.up, new Vector3(0, 2.5f, 0));
+			gameObject.transform.rotation = Quaternion.Euler(0,0,-90f);
 		} else {
-			gameObject.GetComponent<SpriteRenderer>().sortingOrder = 10 - owner.field.Count;
+			gameObject.GetComponent<SpriteRenderer>().sortingOrder = owner.field.Count;
 			adjustment = new Vector3(1.75f + .25f * owner.field.Count, 0, 0.0f);
+			gameObject.transform.position = owner.transform.position + adjustment + Vector3.Scale(transform.up, new Vector3(0, 2.5f, 0));
+			gameObject.transform.rotation = Quaternion.Euler(0,0,90f);
 		}
 
-		gameObject.transform.position = owner.transform.position + adjustment + Vector3.Scale(transform.up, new Vector3(0, 2.5f, 0));
+		
+		
 
 		gameObject.GetComponent<BoxCollider>().enabled = false;
 		Show();
