@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Offensive_Card : Card {
-	protected int value;
+	public int value;
 	public bool kick = false;
 	public bool pass = false;
 	public bool run = false;
@@ -17,6 +17,7 @@ public class Offensive_Card : Card {
 			owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
 		}
 		owner.update_score(value);
+		/*
 		Vector3 adjustment;
 		if (owner.right) { 
 			gameObject.GetComponent<SpriteRenderer>().sortingOrder = owner.field.Count;
@@ -29,10 +30,7 @@ public class Offensive_Card : Card {
 			gameObject.transform.position = owner.transform.position + adjustment + Vector3.Scale(transform.up, new Vector3(0, 2.5f, 0));
 			gameObject.transform.rotation = Quaternion.Euler(0,0,90f);
 		}
-
-		
-		
-
+		*/
 		gameObject.GetComponent<BoxCollider>().enabled = false;
 		Show();
 		AdvanceTurn();

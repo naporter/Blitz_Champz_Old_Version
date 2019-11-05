@@ -25,7 +25,6 @@ public class Card : MonoBehaviour {
 			gameObject.transform.rotation = Quaternion.Euler(0,0,0f);
 			owner.table.Discard(gameObject);
 			owner.remove(gameObject);
-			//owner.order_cards();
 			this.owner = null;
 			Destroy(GetComponent<BoxCollider>());
 			Show();
