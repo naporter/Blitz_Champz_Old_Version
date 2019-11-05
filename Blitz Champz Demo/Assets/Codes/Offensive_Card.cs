@@ -20,13 +20,13 @@ public class Offensive_Card : Card {
 		Vector3 adjustment;
 		if (owner.transform.position.x > 0) { 
 			gameObject.GetComponent<SpriteRenderer>().sortingOrder = owner.field.Count;
-			adjustment = new Vector3(-1.75f + -1 * 0.25f * owner.field.Count, 2.5f, 0.0f);
+			adjustment = new Vector3(-1.75f + -1 * 0.25f * owner.field.Count, 0, 0.0f);
 		} else {
 			gameObject.GetComponent<SpriteRenderer>().sortingOrder = 10 - owner.field.Count;
-			adjustment = new Vector3(1.75f + .25f * owner.field.Count, 2.5f, 0.0f);
+			adjustment = new Vector3(1.75f + .25f * owner.field.Count, 0, 0.0f);
 		}
 
-		gameObject.transform.position = owner.transform.position + adjustment;
+		gameObject.transform.position = owner.transform.position + adjustment + Vector3.Scale(transform.up, new Vector3(0, 2.5f, 0));
 
 		gameObject.GetComponent<BoxCollider>().enabled = false;
 		Show();

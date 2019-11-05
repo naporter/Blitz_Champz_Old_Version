@@ -5,6 +5,7 @@ using UnityEngine;
 public class Deck : MonoBehaviour
 {
     public List<GameObject> draw_deck;
+    public bool ready = false;
     void Start()
     {
         Vector3 deck_position = gameObject.GetComponent<Transform>().position;
@@ -104,15 +105,14 @@ public class Deck : MonoBehaviour
             //draw_deck[a].GetComponent<Card>().Hide();
         }
         gameObject.GetComponent<Transform>().position = gameObject.transform.position + new Vector3(0f, 0f, -2);
+        ready = true;
+        Debug.Log("Deck made");
     }
     
     public GameObject Draw(Player a) {
+        Debug.Log("Deck draw called");
         int random_num = Random.Range(0, draw_deck.Count);
         GameObject drawn_card = draw_deck[random_num];
-    //    drawn_card.GetComponent<Card>().SetOwner(a);
-//        Vector3 adjustment = new Vector3(1.5f * count, 0.0f, 0.0f);
-//        if (a.transform.position.x > 0) {adjustment = new Vector3(-1 * 1.5f * count, 0.0f, 0.0f);}
-//        drawn_card.GetComponent<Transform>().position = a.transform.position + adjustment;
         draw_deck.RemoveAt(random_num);
         return drawn_card;
     }

@@ -9,6 +9,9 @@ public class Card : MonoBehaviour {
 	public void SetOwner(Player own) {
 		this.owner = own;
 		gameObject.GetComponentInChildren<TextMeshPro>().SetText(owner.name + "\nHand");
+		if (owner.up) {
+			gameObject.transform.rotation = Quaternion.Euler(0,0,180f);
+		}
 	}
 	void Start () {
 	}
@@ -30,7 +33,7 @@ public class Card : MonoBehaviour {
 		}
 	}
 	public void AdvanceTurn() {
-		owner.table.AdvanceTurn(owner);
+		owner.table.AdvanceTurn();
 	}
 	private void OnMouseUpAsButton() {
 		if (owner != null && owner.table.current_player == owner) {
@@ -45,7 +48,7 @@ public class Card : MonoBehaviour {
 	}
 	void OnMouseEnter() {
 		if (owner != null && owner == owner.table.current_player) {
-			gameObject.transform.position += new Vector3(0f, +0.5f, 0f);
+			gameObject.transform.position += Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
 			gameObject.GetComponent<SpriteRenderer>().sortingOrder +=20;
 			for (int i = 0; i < owner.hand.Count; i++) {
 				if (owner.hand[i] != gameObject) {
@@ -56,7 +59,7 @@ public class Card : MonoBehaviour {
 	}
 	void OnMouseExit() {
 		if (owner != null && owner == owner.table.current_player) {
-			gameObject.transform.position += new Vector3(0f, -0.5f, 0f);
+			gameObject.transform.position -= Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
 			gameObject.GetComponent<SpriteRenderer>().sortingOrder -=20;
 			for (int i = 0; i < owner.hand.Count; i++) {
 				owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;

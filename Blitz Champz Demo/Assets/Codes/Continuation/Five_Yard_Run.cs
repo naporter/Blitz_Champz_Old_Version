@@ -8,16 +8,8 @@ public class Five_Yard_Run : Continuation_Card
     }
     protected override void Play() {
         owner.draw();
-        owner.drew = true;
+        AdvanceTurn();
     }
-    private void OnMouseUpAsButton() {
-		if (owner.drew == false){
-            if (owner != null && owner.table.current_player == owner) {
-                this.Play();
-                this.Discard();
-            }
-        }
-	}
 	public override void Show() {
         gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/5_yard_run");
     }
