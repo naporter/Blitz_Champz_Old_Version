@@ -369,7 +369,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.09411766, g: 0.48235297, b: 0.19215688, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -534,7 +534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1302132554
 RectTransform:
   m_ObjectHideFlags: 0
@@ -627,10 +627,12 @@ MonoBehaviour:
   draw_deck: {fileID: 0}
   discard: []
   last_card: {fileID: 0}
-  player_count: 2
+  player_count: 4
   pov_player: {fileID: 0}
   player1: {fileID: 0}
   player2: {fileID: 0}
+  player3: {fileID: 0}
+  player4: {fileID: 0}
   p1: {fileID: 2030158532}
   p2: {fileID: 1302132555}
   current_player: {fileID: 0}
@@ -719,7 +721,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2030158532
 MonoBehaviour:
   m_ObjectHideFlags: 0

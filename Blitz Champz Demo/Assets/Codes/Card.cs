@@ -8,7 +8,6 @@ public class Card : MonoBehaviour {
 	public Player owner;
 	public void SetOwner(Player own) {
 		this.owner = own;
-		gameObject.GetComponentInChildren<TextMeshPro>().SetText(owner.name + "\nHand");
 		if (owner.up) {
 			gameObject.transform.rotation = Quaternion.Euler(0,0,180f);
 		}
@@ -22,11 +21,11 @@ public class Card : MonoBehaviour {
 				owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
 			}
 			owner.table.last_card = null;
-			gameObject.GetComponent<Transform>().position = new Vector3(-1f, 0f, 0f);
-			gameObject.GetComponentInChildren<TextMeshPro>().SetText("None" + "\nDiscarded");
+			gameObject.GetComponent<Transform>().position = new Vector3(-1.45f, 0f, 0f);
+			gameObject.transform.rotation = Quaternion.Euler(0,0,0f);
 			owner.table.Discard(gameObject);
 			owner.remove(gameObject);
-			owner.order_cards();
+			//owner.order_cards();
 			this.owner = null;
 			Destroy(GetComponent<BoxCollider>());
 			Show();
