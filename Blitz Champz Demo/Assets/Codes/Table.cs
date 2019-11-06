@@ -22,6 +22,7 @@ public class Table : MonoBehaviour
     public Text p2;
     public Player current_player;
     private bool reversed = false;
+    public bool blitz = false;
     LinkedListNode<Player> current;
     public LinkedList<Player> order = new LinkedList<Player>();
     void Start() {
@@ -90,6 +91,14 @@ public class Table : MonoBehaviour
         }
         current_player = current.Value;
         current_player.draw();
+    }
+    public void Skip() {
+        current_player.stack_cards();
+        if (reversed) {
+            current = current.Previous ?? current.List.Last;
+        } else {
+            current = current.Next ?? current.List.First;
+        }
     }
     public void Reverse() {
         reversed = !reversed;

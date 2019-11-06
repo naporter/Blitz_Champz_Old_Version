@@ -22,8 +22,15 @@ public class Player : MonoBehaviour {
 			gameObject.transform.rotation = Quaternion.Euler(0,0,180f);
 		}
 	}
-	public void update_score(int change) {
-		score += change;
+	public void UpdateScore() {
+		score = 0;
+		foreach (GameObject card in field) {
+			if (card.GetComponent<Card>().owner != this) {
+				field.Remove(card);
+			} else {
+				score += card.GetComponent<Offensive_Card>().GetValue();
+			}
+		}
 	}
 	public void draw() {
 		Deck draw_deck = table.draw_deck;
@@ -44,11 +51,27 @@ public class Player : MonoBehaviour {
 			hand[i].transform.position = gameObject.transform.position;
 			hand[i].GetComponent<Card>().Hide();
 		}
+		order_field();
+	}
+	public void order_field() {
+		for (int i = 0; i < field.Count; i++) {
+			field[i].transform.position = gameObject.transform.position;
+			field[i].GetComponent<SpriteRenderer>().color = Color.white;
+			if (right) {
+				field[i].GetComponent<SpriteRenderer>().sortingOrder = i;
+				Vector3 adjustment = new Vector3(-1.75f + -1 * 0.25f * i, 0, 2 * (field.Count - i));
+				field[i].transform.position = transform.position + adjustment + Vector3.Scale(transform.up, new Vector3(0, 2.5f, 0));
+				field[i].transform.rotation = Quaternion.Euler(0,0,-90f);
+			} else {
+				field[i].GetComponent<SpriteRenderer>().sortingOrder = i;
+				Vector3 adjustment = new Vector3(1.75f + 0.25f * i, 0, 2 * (field.Count - i));
+				field[i].transform.position = transform.position + adjustment + Vector3.Scale(transform.up, new Vector3(0, 2.5f, 0));
+				field[i].transform.rotation = Quaternion.Euler(0,0,90f);
+			}
+		}
 	}
 	public void order_cards() {
-		
 		if (right) {
-			
 			for (int i = 0; i < hand.Count; i++) {
 				Vector3 adjustment = new Vector3(-1 * 0.5f * i, 0.0f, 0.0f);
 				hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * i;
@@ -67,6 +90,20 @@ public class Player : MonoBehaviour {
 				if (this == table.current_player) {
 					hand[i].GetComponent<Card>().Show();
 				}
+			}
+		}
+		for (int i = 0; i < field.Count; i++) {
+			field[i].transform.position = gameObject.transform.position;
+			if (right) {
+				field[i].GetComponent<SpriteRenderer>().sortingOrder = i;
+				Vector3 adjustment = new Vector3(-1.75f + -1 * 0.25f * i, 0, 0.0f);
+				field[i].transform.position = transform.position + adjustment + Vector3.Scale(transform.up, new Vector3(0, 2.5f, 0));
+				field[i].transform.rotation = Quaternion.Euler(0,0,-90f);
+			} else {
+				field[i].GetComponent<SpriteRenderer>().sortingOrder = i;
+				Vector3 adjustment = new Vector3(1.75f + 0.25f * i, 0, 0.0f);
+				field[i].transform.position = transform.position + adjustment + Vector3.Scale(transform.up, new Vector3(0, 2.5f, 0));
+				field[i].transform.rotation = Quaternion.Euler(0,0,90f);
 			}
 		}
 	}
