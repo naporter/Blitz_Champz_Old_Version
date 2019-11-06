@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Interception : Defensive_Card
 {
-    // Start is called before the first frame update
     void Start()
     {
         
@@ -16,15 +15,18 @@ public class Interception : Defensive_Card
         AdvanceTurn();
 	}
     private void OnMouseUpAsButton() {
-		if (owner != null && owner.table.current_player == owner && owner.table.last_card != null && owner.table.last_card.pass) {
-			this.Play();
-			this.Discard();
+		if (owner != null && owner.table.current_player == owner && owner.table.last_card != null) {
+            if (owner.table.last_card.pass) {
+                this.Play();
+                this.Discard();
+            } else {
+                //display message that this is not a valid move
+            }
 		}
 	}
 	public override void Show() {
         gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/interception");
     }
-    // Update is called once per frame
     void Update()
     {
         

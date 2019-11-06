@@ -20,16 +20,15 @@ public class Table : MonoBehaviour
     public Player player4;
     public Text p1;
     public Text p2;
+    public Text p3;
+    public Text p4;
     public Player current_player;
     private bool reversed = false;
-    public bool blitz = false;
     LinkedListNode<Player> current;
     public LinkedList<Player> order = new LinkedList<Player>();
     void Start() {
         Create_Deck();
         Create_Players();
-
-        
         current = order.First;
         current_player = player1;
         StartCoroutine(Wait_For_Deck());
@@ -51,12 +50,14 @@ public class Table : MonoBehaviour
             player3 = player3_object.GetComponent<Player>();
             player3.table = this;
             order.AddLast(player3);
+            p3.gameObject.SetActive(true);
         }
         if (player_count == 4) {
             GameObject player4_object = Instantiate(player, new Vector3(8f, -4.4f, 1f), transform.rotation);
             player4 = player4_object.GetComponent<Player>();
             player4.table = this;
             order.AddLast(player4);
+            p4.gameObject.SetActive(true);
         }
     }
     IEnumerator Wait_For_Deck() {
@@ -82,7 +83,7 @@ public class Table : MonoBehaviour
         Debug.Log("Dealing done");
     }
     public void AdvanceTurn() {
-        //Update_Scores();
+        Update_Scores();
         current_player.stack_cards();
         if (reversed) {
             current = current.Previous ?? current.List.Last;
@@ -104,8 +105,18 @@ public class Table : MonoBehaviour
         reversed = !reversed;
     }
     public void Update_Scores() {
+        player1.UpdateScore();
         p1.text = (player1.score).ToString();
+        player2.UpdateScore();
         p2.text = (player2.score).ToString();
+        if (player3) {
+            player3.UpdateScore();
+            p3.text = (player3.score).ToString();
+        }
+        if (player4) {
+            player4.UpdateScore();
+            p4.text = (player4.score).ToString();
+        }
     }
     void Update() {
     }
