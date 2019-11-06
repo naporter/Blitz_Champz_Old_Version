@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Table : MonoBehaviour
 {
     public Deck draw_deck;
     public List<GameObject> discard;
-    public void Discard(GameObject card) {
-        card.GetComponent<SpriteRenderer>().sortingOrder = discard.Count;
-        discard.Add(card);
-    }
     public Offensive_Card last_card;
     public int player_count;
     public Player pov_player;
@@ -23,7 +20,9 @@ public class Table : MonoBehaviour
     public Text p3;
     public Text p4;
     public Player current_player;
+    public GameObject gameOver;
     private bool reversed = false;
+    private bool ready = true;
     LinkedListNode<Player> current;
     public LinkedList<Player> order = new LinkedList<Player>();
     void Start() {
@@ -32,6 +31,10 @@ public class Table : MonoBehaviour
         current = order.First;
         current_player = player1;
         StartCoroutine(Wait_For_Deck());
+    }
+    public void Discard(GameObject card) {
+        card.GetComponent<SpriteRenderer>().sortingOrder = discard.Count;
+        discard.Add(card);
     }
     private void Create_Players() {
         GameObject player = Resources.Load("Prefabs/player") as GameObject;
@@ -83,7 +86,9 @@ public class Table : MonoBehaviour
         Debug.Log("Dealing done");
     }
     public void AdvanceTurn() {
-        Update_Scores();
+        StartCoroutine(NextPlayer());
+    }
+    IEnumerator NextPlayer() {
         current_player.stack_cards();
         if (reversed) {
             current = current.Previous ?? current.List.Last;
@@ -92,6 +97,8 @@ public class Table : MonoBehaviour
         }
         current_player = current.Value;
         current_player.draw();
+        yield return new WaitUntil(() => ready);
+        Update_Scores();
     }
     public void Skip() {
         current_player.stack_cards();
@@ -104,7 +111,7 @@ public class Table : MonoBehaviour
     public void Reverse() {
         reversed = !reversed;
     }
-    public void Update_Scores() {
+    private void Update_Scores() {
         player1.UpdateScore();
         p1.text = (player1.score).ToString();
         player2.UpdateScore();
@@ -117,6 +124,25 @@ public class Table : MonoBehaviour
             player4.UpdateScore();
             p4.text = (player4.score).ToString();
         }
+        if (player1.score >= 21) {
+            gameOver.SetActive(true);
+            gameOver.GetComponentInChildren<TextMeshProUGUI>().text = "Player 1 wins!";
+        }
+        else if (player2.score >= 21) {
+            gameOver.SetActive(true);
+            gameOver.GetComponentInChildren<TextMeshProUGUI>().text = "Player 2 wins!";
+        }
+        else if (player3 && player3.score >= 21) {
+            gameOver.SetActive(true);
+            gameOver.GetComponentInChildren<TextMeshProUGUI>().text = "Player 3 wins!";
+        }
+        else if (player4 && player4.score >= 21) {
+            gameOver.SetActive(true);
+            gameOver.GetComponentInChildren<TextMeshProUGUI>().text = "Player 4 wins!";
+        }
+    }
+    public void SetReady(bool a) {
+        ready = a;
     }
     void Update() {
     }

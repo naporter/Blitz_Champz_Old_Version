@@ -13,6 +13,7 @@ public class Blitz : Continuation_Card
         StartCoroutine(SelectCard());
     }
     IEnumerator SelectCard() {
+        owner.table.SetReady(false);
         foreach (GameObject card in owner.hand) {
                     card.GetComponent<BoxCollider>().enabled = false;
         }
@@ -60,6 +61,7 @@ public class Blitz : Continuation_Card
             card.GetComponent<BoxCollider>().enabled = true;
         }
         owner.order_field();
+        owner.table.SetReady(true);
         this.Discard();
     }
     private void OnMouseUpAsButton() {
