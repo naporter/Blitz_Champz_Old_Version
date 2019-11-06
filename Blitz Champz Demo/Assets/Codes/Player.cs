@@ -22,13 +22,13 @@ public class Player : MonoBehaviour {
 			gameObject.transform.rotation = Quaternion.Euler(0,0,180f);
 		}
 	}
-	public void update_score(int change) {
+	public void UpdateScore() {
 		score = 0;
 		foreach (GameObject card in field) {
 			if (card.GetComponent<Card>().owner != this) {
 				field.Remove(card);
 			} else {
-				score += card.GetComponent<Offensive_Card>().value;
+				score += card.GetComponent<Offensive_Card>().GetValue();
 			}
 		}
 	}
@@ -56,23 +56,22 @@ public class Player : MonoBehaviour {
 	public void order_field() {
 		for (int i = 0; i < field.Count; i++) {
 			field[i].transform.position = gameObject.transform.position;
+			field[i].GetComponent<SpriteRenderer>().color = Color.white;
 			if (right) {
 				field[i].GetComponent<SpriteRenderer>().sortingOrder = i;
-				Vector3 adjustment = new Vector3(-1.75f + -1 * 0.25f * i, 0, 0.0f);
+				Vector3 adjustment = new Vector3(-1.75f + -1 * 0.25f * i, 0, 2 * (field.Count - i));
 				field[i].transform.position = transform.position + adjustment + Vector3.Scale(transform.up, new Vector3(0, 2.5f, 0));
 				field[i].transform.rotation = Quaternion.Euler(0,0,-90f);
 			} else {
 				field[i].GetComponent<SpriteRenderer>().sortingOrder = i;
-				Vector3 adjustment = new Vector3(1.75f + 0.25f * i, 0, 0.0f);
+				Vector3 adjustment = new Vector3(1.75f + 0.25f * i, 0, 2 * (field.Count - i));
 				field[i].transform.position = transform.position + adjustment + Vector3.Scale(transform.up, new Vector3(0, 2.5f, 0));
 				field[i].transform.rotation = Quaternion.Euler(0,0,90f);
 			}
 		}
 	}
 	public void order_cards() {
-		
 		if (right) {
-			
 			for (int i = 0; i < hand.Count; i++) {
 				Vector3 adjustment = new Vector3(-1 * 0.5f * i, 0.0f, 0.0f);
 				hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * i;

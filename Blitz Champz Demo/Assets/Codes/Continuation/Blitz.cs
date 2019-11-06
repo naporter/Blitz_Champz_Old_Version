@@ -25,6 +25,17 @@ public class Blitz : Continuation_Card
                 }
             }
         }
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        Show();
+        gameObject.transform.position += Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
+        gameObject.GetComponent<SpriteRenderer>().sortingOrder +=20;
+        /*  This doesn't work, the OnMouseExit() function switches them all back to white immediately. Need to figure out how to get around that
+        for (int i = 0; i < owner.hand.Count; i++) {
+            if (owner.hand[i] != gameObject) {
+                owner.hand[i].GetComponent<SpriteRenderer>().color = Color.gray;
+            }
+        }
+        */
         yield return new WaitUntil(() => owner.table.current_player != owner);
         foreach (Player a in owner.table.order) {
             GameObject stolenCard = null;
@@ -43,6 +54,9 @@ public class Blitz : Continuation_Card
                 }
             }
         }
+        for (int i = 0; i < owner.hand.Count; i++) {
+			owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
+		}
         foreach (GameObject card in owner.hand) {
             card.GetComponent<BoxCollider>().enabled = true;
         }

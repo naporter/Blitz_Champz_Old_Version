@@ -16,27 +16,16 @@ public class Offensive_Card : Card {
 		for (int i = 0; i < owner.hand.Count; i++) {
 			owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
 		}
-		owner.update_score(value);
-		/*
-		Vector3 adjustment;
-		if (owner.right) { 
-			gameObject.GetComponent<SpriteRenderer>().sortingOrder = owner.field.Count;
-			adjustment = new Vector3(-1.75f + -1 * 0.25f * owner.field.Count, 0, 0.0f);
-			gameObject.transform.position = owner.transform.position + adjustment + Vector3.Scale(transform.up, new Vector3(0, 2.5f, 0));
-			gameObject.transform.rotation = Quaternion.Euler(0,0,-90f);
-		} else {
-			gameObject.GetComponent<SpriteRenderer>().sortingOrder = owner.field.Count;
-			adjustment = new Vector3(1.75f + .25f * owner.field.Count, 0, 0.0f);
-			gameObject.transform.position = owner.transform.position + adjustment + Vector3.Scale(transform.up, new Vector3(0, 2.5f, 0));
-			gameObject.transform.rotation = Quaternion.Euler(0,0,90f);
-		}
-		*/
+		owner.UpdateScore();
 		gameObject.GetComponent<BoxCollider>().enabled = false;
 		Show();
 		AdvanceTurn();
 	}
+	public int GetValue() {
+		return value;
+	}
 	public void Remove() { //remove card from the field and discard it thus removing points from that player
-		owner.update_score((-1) * value);
+		owner.UpdateScore();
 		Discard();
 	}
 	private void OnMouseUpAsButton() {
@@ -45,6 +34,5 @@ public class Offensive_Card : Card {
 		}
 	}
 	void Update () {
-		
 	}
 }
