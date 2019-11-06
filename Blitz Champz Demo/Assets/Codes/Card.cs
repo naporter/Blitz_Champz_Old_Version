@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 
 public class Card : MonoBehaviour {
@@ -30,6 +29,11 @@ public class Card : MonoBehaviour {
 			Show();
 		}
 	}
+	public void Hide() {
+		gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/back");
+	}
+	public virtual void Show() {
+	}
 	public void AdvanceTurn() {
 		owner.table.AdvanceTurn();
 	}
@@ -38,11 +42,6 @@ public class Card : MonoBehaviour {
 			this.Play();
 			this.Discard();
 		}
-	}
-	public void Hide() {
-		gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/back");
-	}
-	public virtual void Show() {
 	}
 	void OnMouseEnter() {
 		if (owner != null && owner == owner.table.current_player) {

@@ -57,6 +57,7 @@
      <Compile Include="Assets\Codes\Defense\Interception.cs" />
      <Compile Include="Assets\Codes\Defense\Tackle.cs" />
      <Compile Include="Assets\Codes\Defensive_Card.cs" />
+     <Compile Include="Assets\Codes\GameOver.cs" />
      <Compile Include="Assets\Codes\Offense\Conversion.cs" />
      <Compile Include="Assets\Codes\Offense\Extra_Point.cs" />
      <Compile Include="Assets\Codes\Offense\Field_Goal.cs" />

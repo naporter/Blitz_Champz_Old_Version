@@ -13,7 +13,7 @@ public class Blitz : Continuation_Card
         StartCoroutine(SelectCard());
     }
     IEnumerator SelectCard() {
-        owner.table.blitz = true;
+        owner.table.SetReady(false);
         foreach (GameObject card in owner.hand) {
                     card.GetComponent<BoxCollider>().enabled = false;
         }
@@ -61,17 +61,28 @@ public class Blitz : Continuation_Card
             card.GetComponent<BoxCollider>().enabled = true;
         }
         owner.order_field();
+        owner.table.SetReady(true);
         this.Discard();
     }
     private void OnMouseUpAsButton() {
-		if (owner != null && owner.table.current_player == owner) {
-			StartCoroutine(SelectCard());
+		bool canPlay = true;
+        foreach (Player a in owner.table.order) {
+            if (owner != a) {
+                if (owner.field.Count == 0) {canPlay = false;}
+            }
+        }
+        if (owner != null && owner.table.current_player == owner) {
+			if (canPlay) {
+                StartCoroutine(SelectCard());
+            }
+            else {
+                //Display some warning that this is not a valid move because no cards can be stolen
+            }
 		}
 	}
 	public override void Show() {
         gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/blitz");
     }
-    // Update is called once per frame
     void Update()
     {
         

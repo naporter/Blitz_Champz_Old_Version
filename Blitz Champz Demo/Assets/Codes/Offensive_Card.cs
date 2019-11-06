@@ -16,7 +16,6 @@ public class Offensive_Card : Card {
 		for (int i = 0; i < owner.hand.Count; i++) {
 			owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
 		}
-		owner.UpdateScore();
 		gameObject.GetComponent<BoxCollider>().enabled = false;
 		Show();
 		AdvanceTurn();
