@@ -83,6 +83,20 @@ public class Blitz : Continuation_Card
 	public override void Show() {
         gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/blitz");
     }
+    public new void Discard () {
+		if (this.owner != null) {
+			for (int i = 0; i < owner.hand.Count; i++) {
+				owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
+			}
+			gameObject.GetComponent<Transform>().position = new Vector3(-1.45f, 0f, 0f);
+			gameObject.transform.rotation = Quaternion.Euler(0,0,0f);
+			owner.table.Discard(gameObject);
+			owner.remove(gameObject);
+			this.owner = null;
+			Destroy(GetComponent<BoxCollider>());
+			Show();
+		}
+	}
     void Update()
     {
         
