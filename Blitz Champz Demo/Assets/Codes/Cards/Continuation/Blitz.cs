@@ -9,6 +9,18 @@ public class Blitz : Continuation_Card
     {
         
     }
+    public override bool CheckValid() {
+        foreach (Player a in owner.table.order) {
+            if (a != owner) {
+                if (a.field.Count > 0) {
+                    valid = true;
+                    return true;
+                }
+            }
+        }
+        valid = false;
+        return false;
+    }
     protected override void Play() {
         StartCoroutine(SelectCard());
     }
@@ -50,7 +62,7 @@ public class Blitz : Continuation_Card
                 }
                 if (stolenCard) {
                     a.field.Remove(stolenCard);
-                    a.order_field();
+                    a.OrderField();
                 }
             }
         }
@@ -60,7 +72,7 @@ public class Blitz : Continuation_Card
         foreach (GameObject card in owner.hand) {
             card.GetComponent<BoxCollider>().enabled = true;
         }
-        owner.order_field();
+        owner.OrderField();
         owner.table.SetReady(true);
         this.Discard();
     }

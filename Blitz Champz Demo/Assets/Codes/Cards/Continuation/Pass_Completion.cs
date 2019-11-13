@@ -7,7 +7,7 @@ public class Pass_Completion : Continuation_Card
     void Start() {
     }
     protected override void Play() {
-        owner.draw();
+        owner.Draw();
         AdvanceTurn();
     }
 	public override void Show() {

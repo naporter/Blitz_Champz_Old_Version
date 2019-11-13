@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Offensive_Card : Card {
-	public int value;
-	public bool kick = false;
-	public bool pass = false;
-	public bool run = false;
+	protected int value;
+	protected bool kick = false;
+	protected bool pass = false;
+	protected bool run = false;
 	void Start() {
+	}
+	public bool GetKick() {
+		return kick;
+	}
+	public bool GetPass() {
+		return pass;
+	}
+	public bool GetRun() {
+		return run;
 	}
 	protected override void Play() {
 		owner.field.Add(gameObject);

@@ -10,8 +10,8 @@ public class First_Down : Continuation_Card
         
     }
     protected override void Play() {
-        owner.draw();
-        owner.draw();
+        owner.Draw();
+        owner.Draw();
         AdvanceTurn();
     }
 	public override void Show() {

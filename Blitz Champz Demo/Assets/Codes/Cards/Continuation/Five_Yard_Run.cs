@@ -7,7 +7,7 @@ public class Five_Yard_Run : Continuation_Card
     void Start() {
     }
     protected override void Play() {
-        owner.draw();
+        owner.Draw();
         AdvanceTurn();
     }
 	public override void Show() {

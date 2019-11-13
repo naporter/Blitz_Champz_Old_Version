@@ -5,15 +5,19 @@ using UnityEngine;
 
 public class Card : MonoBehaviour {
 	public Player owner;
+	protected bool valid = true;
 	public void SetOwner(Player own) {
 		this.owner = own;
 		if (owner.up) {
 			gameObject.transform.rotation = Quaternion.Euler(0,0,180f);
 		}
 	}
+	public virtual bool CheckValid() {
+		return valid;
+	}
 	void Start () {
 	}
-
+	
 	public void Discard () {
 		if (this.owner != null) {
 			for (int i = 0; i < owner.hand.Count; i++) {

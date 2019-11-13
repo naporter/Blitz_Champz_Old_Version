@@ -90,19 +90,19 @@ public class Table : MonoBehaviour
         StartCoroutine(NextPlayer());
     }
     IEnumerator NextPlayer() {
-        current_player.stack_cards();
+        current_player.StackCards();
         if (reversed) {
             current = current.Previous ?? current.List.Last;
         } else {
             current = current.Next ?? current.List.First;
         }
         current_player = current.Value;
-        current_player.draw();
+        current_player.Draw();
         yield return new WaitUntil(() => ready);
         Update_Scores();
     }
     public void Skip() {
-        current_player.stack_cards();
+        current_player.StackCards();
         if (reversed) {
             current = current.Previous ?? current.List.Last;
         } else {
