@@ -50,6 +50,7 @@ public class Player : MonoBehaviour {
 		for (int i = 0; i < hand.Count; i++) {
 			hand[i].transform.position = gameObject.transform.position;
 			hand[i].GetComponent<Card>().Hide();
+			hand[i].GetComponent<BoxCollider>().enabled = true;
 		}
 		order_field();
 	}
@@ -106,6 +107,27 @@ public class Player : MonoBehaviour {
 				field[i].transform.rotation = Quaternion.Euler(0,0,90f);
 			}
 		}
+	}
+	public bool StopWin() {
+		bool canStop = false;
+		foreach (GameObject a in hand) {
+			if (a.GetComponent<Defensive_Card>() != null) {
+				if (table.last_card.run == true && a.GetComponent<Defensive_Card>().run == true) {
+					canStop = true;
+				} else if (table.last_card.pass == true && a.GetComponent<Defensive_Card>().pass == true) {
+					canStop = true;
+				} else if (table.last_card.kick == true && a.GetComponent<Defensive_Card>().kick == true) {
+					canStop = true;
+				} else {
+					a.GetComponent<BoxCollider>().enabled = false;
+					a.GetComponent<SpriteRenderer>().color = Color.gray;
+				}
+			} else {
+				a.GetComponent<BoxCollider>().enabled = false;
+				a.GetComponent<SpriteRenderer>().color = Color.gray;
+			}
+		}
+		return canStop;
 	}
 	void Update () {
 	}

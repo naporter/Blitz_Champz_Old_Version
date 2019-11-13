@@ -6,7 +6,7 @@ public class Interception : Defensive_Card
 {
     void Start()
     {
-        
+        pass = true;
     }
     protected override void Play() {
 		if (owner.table.last_card.pass) {

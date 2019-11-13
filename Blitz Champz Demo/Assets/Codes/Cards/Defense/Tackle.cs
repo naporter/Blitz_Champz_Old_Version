@@ -6,7 +6,7 @@ public class Tackle : Defensive_Card
 {
     void Start()
     {
-        
+        run = true;
     }
     protected override void Play() {
 		if (owner.table.last_card.run) {

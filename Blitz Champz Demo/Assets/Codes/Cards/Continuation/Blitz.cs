@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Blitz : Continuation_Card
 {
-    // Start is called before the first frame update
+    private bool played = false;
     void Start()
     {
         
@@ -25,17 +25,16 @@ public class Blitz : Continuation_Card
                 }
             }
         }
+        played = true; //this is used to disable the OnMouseExit() method so that it doesn't lighten the cards
         gameObject.GetComponent<BoxCollider>().enabled = false;
         Show();
         gameObject.transform.position += Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
         gameObject.GetComponent<SpriteRenderer>().sortingOrder +=20;
-        /*  This doesn't work, the OnMouseExit() function switches them all back to white immediately. Need to figure out how to get around that
         for (int i = 0; i < owner.hand.Count; i++) {
             if (owner.hand[i] != gameObject) {
                 owner.hand[i].GetComponent<SpriteRenderer>().color = Color.gray;
             }
         }
-        */
         yield return new WaitUntil(() => owner.table.current_player != owner);
         foreach (Player a in owner.table.order) {
             GameObject stolenCard = null;
@@ -47,6 +46,7 @@ public class Blitz : Continuation_Card
                         card.GetComponent<Card>().owner = a;
                     }
                     card.GetComponent<BoxCollider>().enabled = false;
+                    card.GetComponent<SpriteRenderer>().color = Color.white;
                 }
                 if (stolenCard) {
                     a.field.Remove(stolenCard);
@@ -65,10 +65,12 @@ public class Blitz : Continuation_Card
         this.Discard();
     }
     private void OnMouseUpAsButton() {
-		bool canPlay = true;
+		bool canPlay = false;
         foreach (Player a in owner.table.order) {
-            if (owner != a) {
-                if (owner.field.Count == 0) {canPlay = false;}
+            if (a != owner) {
+                if (a.field.Count > 0) {
+                    canPlay = true;
+                }
             }
         }
         if (owner != null && owner.table.current_player == owner) {
@@ -76,8 +78,28 @@ public class Blitz : Continuation_Card
                 StartCoroutine(SelectCard());
             }
             else {
-                //Display some warning that this is not a valid move because no cards can be stolen
+                Debug.Log("Not a valid move!");
             }
+		}
+	}
+    void OnMouseExit() {
+		if (owner != null && owner == owner.table.current_player && !played) {
+			if (owner.hand.Contains(gameObject)) {
+				gameObject.transform.position -= Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
+				gameObject.GetComponent<SpriteRenderer>().sortingOrder -=20;
+				for (int i = 0; i < owner.hand.Count; i++) {
+					owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
+				}
+			} else {
+				foreach(Player a in owner.table.order) {
+					if (owner != a && a.field.Contains(gameObject)) {
+						gameObject.GetComponent<SpriteRenderer>().sortingOrder -=20;
+						for (int i = 0; i < a.field.Count; i++) {
+							a.field[i].GetComponent<SpriteRenderer>().color = Color.white;
+						}
+					}
+				}
+			}
 		}
 	}
 	public override void Show() {
