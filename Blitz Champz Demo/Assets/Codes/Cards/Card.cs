@@ -56,6 +56,15 @@ public class Card : MonoBehaviour {
 			} else {
 				foreach(Player a in owner.table.order) {
 					if (owner != a && a.field.Contains(gameObject)) {
+						foreach(Player b in owner.table.order) {
+							if (b != a) {
+								for (int i = 0; i < b.field.Count; i++) {
+									if (b.field[i] != gameObject) {
+										b.field[i].GetComponent<SpriteRenderer>().color = Color.gray;
+									}
+								}
+							}
+						}
 						gameObject.GetComponent<SpriteRenderer>().sortingOrder +=20;
 						for (int i = 0; i < a.field.Count; i++) {
 							if (a.field[i] != gameObject) {
@@ -78,6 +87,15 @@ public class Card : MonoBehaviour {
 			} else {
 				foreach(Player a in owner.table.order) {
 					if (owner != a && a.field.Contains(gameObject)) {
+						foreach(Player b in owner.table.order) {
+							if (b != a) {
+								for (int i = 0; i < b.field.Count; i++) {
+									if (b.field[i] != gameObject) {
+										b.field[i].GetComponent<SpriteRenderer>().color = Color.white;
+									}
+								}
+							}
+						}
 						gameObject.GetComponent<SpriteRenderer>().sortingOrder -=20;
 						for (int i = 0; i < a.field.Count; i++) {
 							a.field[i].GetComponent<SpriteRenderer>().color = Color.white;

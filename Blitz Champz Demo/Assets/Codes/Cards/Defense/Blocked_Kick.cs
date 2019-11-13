@@ -6,7 +6,7 @@ public class Blocked_Kick : Defensive_Card
 {
     void Start()
     {
-        
+        kick = true;
     }
     protected override void Play() {
 		if (owner.table.last_card.kick) {

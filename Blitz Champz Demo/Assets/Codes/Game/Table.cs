@@ -125,19 +125,19 @@ public class Table : MonoBehaviour
             player4.UpdateScore();
             p4.text = (player4.score).ToString();
         }
-        if (player1.score >= 21) {
+        if (player1.score >= 21 && !current_player.StopWin()) {
             gameOver.SetActive(true);
             gameOver.GetComponentInChildren<TextMeshProUGUI>().text = "Player 1 wins!";
         }
-        else if (player2.score >= 21) {
+        else if (player2.score >= 21 && !current_player.StopWin()) {
             gameOver.SetActive(true);
             gameOver.GetComponentInChildren<TextMeshProUGUI>().text = "Player 2 wins!";
         }
-        else if (player3 && player3.score >= 21) {
+        else if (player3 && player3.score >= 21 && !current_player.StopWin()) {
             gameOver.SetActive(true);
             gameOver.GetComponentInChildren<TextMeshProUGUI>().text = "Player 3 wins!";
         }
-        else if (player4 && player4.score >= 21) {
+        else if (player4 && player4.score >= 21 && !current_player.StopWin()) {
             gameOver.SetActive(true);
             gameOver.GetComponentInChildren<TextMeshProUGUI>().text = "Player 4 wins!";
         }
