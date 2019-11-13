@@ -6,6 +6,7 @@ using UnityEngine;
 public class Card : MonoBehaviour {
 	public Player owner;
 	protected bool valid = true;
+	protected bool played = false;
 	public void SetOwner(Player own) {
 		this.owner = own;
 		if (owner.up) {
@@ -27,7 +28,7 @@ public class Card : MonoBehaviour {
 			gameObject.GetComponent<Transform>().position = new Vector3(-1.45f, 0f, 0f);
 			gameObject.transform.rotation = Quaternion.Euler(0,0,0f);
 			owner.table.Discard(gameObject);
-			owner.remove(gameObject);
+			owner.Remove(gameObject);
 			this.owner = null;
 			Destroy(GetComponent<BoxCollider>());
 			Show();
@@ -54,7 +55,11 @@ public class Card : MonoBehaviour {
 				gameObject.GetComponent<SpriteRenderer>().sortingOrder +=20;
 				for (int i = 0; i < owner.hand.Count; i++) {
 					if (owner.hand[i] != gameObject) {
+						if (owner.hand[i].GetComponent<Card>().played) {
+							gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+						} else {
 						owner.hand[i].GetComponent<SpriteRenderer>().color = Color.gray;
+						}
 					}
 				}
 			} else {
@@ -85,8 +90,12 @@ public class Card : MonoBehaviour {
 			if (owner.hand.Contains(gameObject)) {
 				gameObject.transform.position -= Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
 				gameObject.GetComponent<SpriteRenderer>().sortingOrder -=20;
-				for (int i = 0; i < owner.hand.Count; i++) {
-					owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
+				if (!played){
+					for (int i = 0; i < owner.hand.Count; i++) {
+						owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
+					}
+				} else {
+					gameObject.GetComponent<SpriteRenderer>().color = Color.white;
 				}
 			} else {
 				foreach(Player a in owner.table.order) {

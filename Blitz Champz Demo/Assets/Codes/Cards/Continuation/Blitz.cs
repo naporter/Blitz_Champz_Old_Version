@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Blitz : Continuation_Card
 {
-    private bool played = false;
     void Start()
     {
         
@@ -77,20 +76,18 @@ public class Blitz : Continuation_Card
         this.Discard();
     }
     private void OnMouseUpAsButton() {
-		bool canPlay = false;
-        foreach (Player a in owner.table.order) {
-            if (a != owner) {
-                if (a.field.Count > 0) {
-                    canPlay = true;
-                }
-            }
-        }
+		bool canPlay = CheckValid();
         if (owner != null && owner.table.current_player == owner) {
 			if (canPlay) {
                 StartCoroutine(SelectCard());
             }
             else {
-                Debug.Log("Not a valid move!");
+                if (owner.GetValid()) {
+                	Debug.Log("Not a valid move");
+				} else {
+					AdvanceTurn();
+					this.Discard();
+				}
             }
 		}
 	}
@@ -125,7 +122,7 @@ public class Blitz : Continuation_Card
 			gameObject.GetComponent<Transform>().position = new Vector3(-1.45f, 0f, 0f);
 			gameObject.transform.rotation = Quaternion.Euler(0,0,0f);
 			owner.table.Discard(gameObject);
-			owner.remove(gameObject);
+			owner.Remove(gameObject);
 			this.owner = null;
 			Destroy(GetComponent<BoxCollider>());
 			Show();

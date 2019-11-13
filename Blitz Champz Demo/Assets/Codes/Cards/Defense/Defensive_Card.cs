@@ -10,6 +10,9 @@ public class Defensive_Card : Card {
 	void Start () {
 		
 	}
+	public void SetPlayed(bool a) {
+		played = a;
+	}
 	public bool GetKick() {
 		return kick;
 	}
@@ -24,27 +27,36 @@ public class Defensive_Card : Card {
 		AdvanceTurn();
 	}
 	private void OnMouseUpAsButton() {
-		if (owner != null && owner.table.current_player == owner && owner.table.last_card != null) {
+		if (owner != null && owner.table.current_player == owner) {
             if (CheckValid()) {
 				this.Play();
                 this.Discard();
             } else {
-                //display a message that this is not a valid move
+				if (owner.GetValid()) {
+                	Debug.Log("Not a valid move");
+				} else {
+					AdvanceTurn();
+					this.Discard();
+				}
             }
 		}
 	}
 	public override bool CheckValid() {
-		if (owner.table.last_card.GetPass() == true && pass == true) {
-			valid = true;
-			return true;
-		} else if (owner.table.last_card.GetRun() == true && run == true) {
-			valid = true;
-			return true;
-		} else if (owner.table.last_card.GetKick() == true && kick == true) {
-			valid = true;
-			return true;
+		if(owner.table.last_card){
+			if (owner.table.last_card.GetPass() == true && pass == true) {
+				valid = true;
+				return true;
+			} else if (owner.table.last_card.GetRun() == true && run == true) {
+				valid = true;
+				return true;
+			} else if (owner.table.last_card.GetKick() == true && kick == true) {
+				valid = true;
+				return true;
+			} else {
+				valid = true;
+				return false;
+			}
 		} else {
-			valid = true;
 			return false;
 		}
 	}

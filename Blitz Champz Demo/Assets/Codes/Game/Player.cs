@@ -10,6 +10,7 @@ public class Player : MonoBehaviour {
 	public Table table;
 	public bool right = false;
 	public bool up = false;
+	public bool valid = true;
 	void Start () {
 		score = 0;
 		if (this.transform.position.x > 0) {
@@ -33,15 +34,14 @@ public class Player : MonoBehaviour {
 	public void Draw() {
 		Deck draw_deck = table.draw_deck;
 		if (draw_deck.draw_deck.Count > 0 && table.current_player == this) {
-			Debug.Log("if (draw_deck.draw_deck.Count > 0 && table.current_player == this)");
 			GameObject new_card = draw_deck.Draw(this);
 			new_card.GetComponent<Card>().SetOwner(this);
 			hand.Add(new_card);
-			OrderCards();
 		}
+		OrderCards();
 	}
 
-	public void remove(GameObject card) {
+	public void Remove(GameObject card) {
 		field.Remove(card);
 		hand.Remove(card);
 	}
@@ -71,6 +71,9 @@ public class Player : MonoBehaviour {
 		}
 	}
 	public void OrderCards() {
+		if (CheckValid() == false) {
+			Debug.Log("No valid cards. Discard please.");
+		}
 		if (right) {
 			for (int i = 0; i < hand.Count; i++) {
 				Vector3 adjustment = new Vector3(-1 * 0.5f * i, 0.0f, 0.0f);
@@ -95,16 +98,23 @@ public class Player : MonoBehaviour {
 		}
 		OrderField();
 	}
+	protected bool CheckValid() {
+		bool temp_valid = false;
+		for (int i = 0; i < hand.Count; i++) {
+			if (hand[i].GetComponent<Card>().CheckValid()) {
+				temp_valid = true;
+			}
+		}
+		valid = temp_valid;
+		return temp_valid;
+	}
 	public bool StopWin() {
 		bool canStop = false;
 		foreach (GameObject a in hand) {
 			if (a.GetComponent<Defensive_Card>() != null) {
-				if (table.last_card.GetRun() == true && a.GetComponent<Defensive_Card>().GetRun() == true) {
+				if (a.GetComponent<Defensive_Card>().CheckValid()) {
 					canStop = true;
-				} else if (table.last_card.GetPass() == true && a.GetComponent<Defensive_Card>().GetPass() == true) {
-					canStop = true;
-				} else if (table.last_card.GetKick() == true && a.GetComponent<Defensive_Card>().GetKick() == true) {
-					canStop = true;
+					a.GetComponent<Defensive_Card>().SetPlayed(true);
 				} else {
 					a.GetComponent<BoxCollider>().enabled = false;
 					a.GetComponent<SpriteRenderer>().color = Color.gray;
@@ -115,6 +125,9 @@ public class Player : MonoBehaviour {
 			}
 		}
 		return canStop;
+	}
+	public bool GetValid() {
+		return valid;
 	}
 	void Update () {
 	}

@@ -38,7 +38,6 @@ public class Deck : MonoBehaviour
         }
 
 
-
         for (int a = 0; a < 3; a++) {
             GameObject interception = Resources.Load("Prefabs/interception") as GameObject;
             GameObject new_interception = Instantiate(interception, deck_position, transform.rotation);
@@ -54,7 +53,6 @@ public class Deck : MonoBehaviour
             GameObject new_blocked_kick = Instantiate(blocked_kick, deck_position, transform.rotation);
             draw_deck.Add(new_blocked_kick);
         }
-
 
         for (int a = 0; a < 4; a++) {
             GameObject fumble = Resources.Load("Prefabs/fumble") as GameObject;
@@ -102,7 +100,7 @@ public class Deck : MonoBehaviour
             draw_deck.Add(new_end_of_quarter4);
         }
         for (int a = 0; a < draw_deck.Count; a++) {
-            //draw_deck[a].GetComponent<Card>().Hide();
+            draw_deck[a].GetComponent<Card>().Hide();
         }
         gameObject.GetComponent<Transform>().position = gameObject.transform.position + new Vector3(0f, 0f, -2);
         ready = true;
@@ -110,17 +108,14 @@ public class Deck : MonoBehaviour
     }
     
     public GameObject Draw(Player a) {
-        Debug.Log("Deck draw called");
         int random_num = Random.Range(0, draw_deck.Count);
         GameObject drawn_card = draw_deck[random_num];
         draw_deck.RemoveAt(random_num);
         return drawn_card;
     }
     private void OnMouseUpAsButton() {
-
 	}
     void Update()
     {
-        
     }
 }
