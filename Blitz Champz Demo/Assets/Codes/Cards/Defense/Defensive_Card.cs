@@ -11,7 +11,7 @@ public class Defensive_Card : Card {
 		
 	}
 	public void SetPlayed(bool a) {
-		played = a;
+		win_played = a;
 	}
 	public bool GetKick() {
 		return kick;

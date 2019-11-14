@@ -113,17 +113,13 @@ public class Table : MonoBehaviour
         reversed = !reversed;
     }
     private void Update_Scores() {
-        player1.UpdateScore();
-        p1.text = (player1.score).ToString();
-        player2.UpdateScore();
-        p2.text = (player2.score).ToString();
+        p1.text = player1.UpdateScore().ToString();
+        p2.text = player2.UpdateScore().ToString();
         if (player3) {
-            player3.UpdateScore();
-            p3.text = (player3.score).ToString();
+            p3.text = player3.UpdateScore().ToString();
         }
         if (player4) {
-            player4.UpdateScore();
-            p4.text = (player4.score).ToString();
+            p4.text = player4.UpdateScore().ToString();
         }
         if (player1.score >= 21 && !current_player.StopWin()) {
             gameOver.SetActive(true);

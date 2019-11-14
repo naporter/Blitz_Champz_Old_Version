@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Blitz : Continuation_Card
 {
+    private bool played = false;
     void Start()
     {
         
     }
+    public void SetPlayed(bool a) {
+		win_played = a;
+	}
     public override bool CheckValid() {
         foreach (Player a in owner.table.order) {
             if (a != owner) {
@@ -24,15 +28,33 @@ public class Blitz : Continuation_Card
         StartCoroutine(SelectCard());
     }
     IEnumerator SelectCard() {
+        bool losing = false;
+        Player winner = null;
         owner.table.SetReady(false);
         foreach (GameObject card in owner.hand) {
                     card.GetComponent<BoxCollider>().enabled = false;
         }
         foreach (Player a in owner.table.order) {
+            if (owner != a && a.UpdateScore() >= 21) {
+                losing = true;
+                winner = a;
+            }
+        }
+        foreach (Player a in owner.table.order) {
             if (owner != a) {
-                foreach (GameObject card in a.field) {
-                    card.GetComponent<Card>().owner = owner;
-                    card.GetComponent<BoxCollider>().enabled = true;
+                if (losing && a == winner) {
+                    int temp_score = a.UpdateScore();
+                    foreach (GameObject card in a.field) {
+                        if ((temp_score - 21) < card.GetComponent<Offensive_Card>().GetValue()){
+                            card.GetComponent<Card>().owner = owner;
+                            card.GetComponent<BoxCollider>().enabled = true;
+                        }
+                    }
+                } else if (!losing) {
+                    foreach (GameObject card in a.field) {
+                        card.GetComponent<Card>().owner = owner;
+                        card.GetComponent<BoxCollider>().enabled = true;
+                    }
                 }
             }
         }
@@ -130,6 +152,5 @@ public class Blitz : Continuation_Card
 	}
     void Update()
     {
-        
     }
 }

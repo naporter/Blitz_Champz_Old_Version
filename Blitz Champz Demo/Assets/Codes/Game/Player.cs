@@ -21,7 +21,7 @@ public class Player : MonoBehaviour {
 			gameObject.transform.rotation = Quaternion.Euler(0,0,180f);
 		}
 	}
-	public void UpdateScore() {
+	public int UpdateScore() {
 		score = 0;
 		foreach (GameObject card in field) {
 			if (card.GetComponent<Card>().owner != this) {
@@ -30,6 +30,7 @@ public class Player : MonoBehaviour {
 				score += card.GetComponent<Offensive_Card>().GetValue();
 			}
 		}
+		return score;
 	}
 	public void Draw() {
 		Deck draw_deck = table.draw_deck;
@@ -119,6 +120,9 @@ public class Player : MonoBehaviour {
 					a.GetComponent<BoxCollider>().enabled = false;
 					a.GetComponent<SpriteRenderer>().color = Color.gray;
 				}
+			} else if (a.GetComponent<Blitz>() != null) {
+				canStop = true;
+				a.GetComponent<Blitz>().SetPlayed(true);
 			} else {
 				a.GetComponent<BoxCollider>().enabled = false;
 				a.GetComponent<SpriteRenderer>().color = Color.gray;

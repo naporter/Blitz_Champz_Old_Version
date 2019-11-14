@@ -6,7 +6,7 @@ using UnityEngine;
 public class Card : MonoBehaviour {
 	public Player owner;
 	protected bool valid = true;
-	protected bool played = false;
+	protected bool win_played = false;
 	public void SetOwner(Player own) {
 		this.owner = own;
 		if (owner.up) {
@@ -18,7 +18,6 @@ public class Card : MonoBehaviour {
 	}
 	void Start () {
 	}
-	
 	public void Discard () {
 		if (this.owner != null) {
 			for (int i = 0; i < owner.hand.Count; i++) {
@@ -55,7 +54,7 @@ public class Card : MonoBehaviour {
 				gameObject.GetComponent<SpriteRenderer>().sortingOrder +=20;
 				for (int i = 0; i < owner.hand.Count; i++) {
 					if (owner.hand[i] != gameObject) {
-						if (owner.hand[i].GetComponent<Card>().played) {
+						if (owner.hand[i].GetComponent<Card>().win_played) {
 							gameObject.GetComponent<SpriteRenderer>().color = Color.white;
 						} else {
 						owner.hand[i].GetComponent<SpriteRenderer>().color = Color.gray;
@@ -90,7 +89,7 @@ public class Card : MonoBehaviour {
 			if (owner.hand.Contains(gameObject)) {
 				gameObject.transform.position -= Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
 				gameObject.GetComponent<SpriteRenderer>().sortingOrder -=20;
-				if (!played){
+				if (!win_played){
 					for (int i = 0; i < owner.hand.Count; i++) {
 						owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
 					}
