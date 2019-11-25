@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 using TMPro;
 
-public class Table : MonoBehaviour
+using Photon.Pun;
+using Photon.Realtime;
+using Photon.Pun.Demo.PunBasics;
+
+public class Table : MonoBehaviourPunCallbacks
 {
     public Deck draw_deck;
     public List<GameObject> discard;
@@ -25,39 +30,91 @@ public class Table : MonoBehaviour
     private bool ready = true;
     LinkedListNode<Player> current;
     public LinkedList<Player> order = new LinkedList<Player>();
+    public LinkedList<Photon.Realtime.Player> temp_order = new LinkedList<Photon.Realtime.Player>();
+    public LinkedListNode<Photon.Realtime.Player> temp_current;
     void Start() {
-        player_count = Manager.PlayerCount;
-        Create_Deck();
-        Create_Players();
-        current = order.First;
-        current_player = player1;
-        StartCoroutine(Wait_For_Deck());
+        if (PlayerManager.LocalPlayerInstance == null && PhotonNetwork.IsMasterClient) {
+            Debug.Log("B");
+            foreach(Photon.Realtime.Player p in PhotonNetwork.PlayerList) {
+                temp_order.AddLast(p);
+            }
+            temp_current = temp_order.First;
+            for (int a = 0; a < temp_order.Count; a++) {
+                Debug.Log("A");
+                if (temp_current.Value.NickName == PhotonNetwork.NickName) {
+                    Debug.Log("This player equals this player");
+                    GameObject player1_object = PhotonNetwork.Instantiate("player", new Vector3(-8f, -4.4f, 1f), transform.rotation);
+                    player1 = player1_object.GetComponent<Player>();
+                    order.AddLast(player1);
+                    player1.table = this;
+                    temp_current = temp_current.Next ?? temp_current.List.First;
+                    for (int b = 0; b < temp_order.Count - 1; b++) {
+                        Debug.Log(b);
+                        Debug.Log("C");
+                        if (b == 0) {
+                            GameObject player2_object = PhotonNetwork.Instantiate("player", new Vector3(-8f, 4.4f, 1f), transform.rotation);
+                            player2 = player2_object.GetComponent<Player>();
+                            order.AddLast(player2);
+                            player2.table = this;
+                            player2_object.GetComponent<PhotonView>().TransferOwnership(temp_current.Value);
+                            temp_current = temp_current.Next ?? temp_current.List.First;
+                        } else if (b == 1) {
+                            GameObject player3_object = PhotonNetwork.Instantiate("player", new Vector3(8f, 4.4f, 1f), transform.rotation);
+                            player3 = player3_object.GetComponent<Player>();
+                            order.AddLast(player3);
+                            player3.table = this;
+                            player3_object.GetComponent<PhotonView>().TransferOwnership(temp_current.Value);
+                            temp_current = temp_current.Next ?? temp_current.List.First;
+                        } else if(b == 2) {
+                            GameObject player4_object = PhotonNetwork.Instantiate("player", new Vector3(8f, -4.4f, 1f), transform.rotation);
+                            player4 = player4_object.GetComponent<Player>();
+                            order.AddLast(player4);
+                            player4.table = this;
+                            player4_object.GetComponent<PhotonView>().TransferOwnership(temp_current.Value);
+                            temp_current = temp_current.Next ?? temp_current.List.First;
+                        }
+                    } break;
+                } else {
+                    temp_current = temp_current.Next ?? temp_current.List.First;
+                }
+            }
+            player_count = Manager.PlayerCount;
+            Create_Deck();
+            //Create_Players();
+            current = order.First;
+            current_player = player1;
+            StartCoroutine(Wait_For_Deck());
+        }
+        
     }
     public void Discard(GameObject card) {
         card.GetComponent<SpriteRenderer>().sortingOrder = discard.Count;
         discard.Add(card);
     }
+    private void AddPlayer() {
+
+    }
     private void Create_Players() {
         GameObject player = Resources.Load("Prefabs/player") as GameObject;
         if (player_count > 1) {
-            GameObject player1_object = Instantiate(player, new Vector3(-8f, -4.4f, 1f), transform.rotation);
+            GameObject player1_object = PhotonNetwork.Instantiate("player", new Vector3(-8f, -4.4f, 1f), transform.rotation);
             player1 = player1_object.GetComponent<Player>();
             player1.table = this;
-            GameObject player2_object = Instantiate(player, new Vector3(-8f, 4.4f, 1f), transform.rotation);
+            GameObject player2_object = PhotonNetwork.Instantiate("player", new Vector3(-8f, 4.4f, 1f), transform.rotation);
             player2 = player2_object.GetComponent<Player>();
             player2.table = this;
             order.AddLast(player1);
             order.AddLast(player2);
         }
         if (player_count > 2) {
-            GameObject player3_object = Instantiate(player, new Vector3(8f, 4.4f, 1f), transform.rotation);
+            GameObject player3_object = PhotonNetwork.Instantiate("player", new Vector3(8f, 4.4f, 1f), transform.rotation);
             player3 = player3_object.GetComponent<Player>();
             player3.table = this;
             order.AddLast(player3);
             p3.gameObject.SetActive(true);
         }
         if (player_count == 4) {
-            GameObject player4_object = Instantiate(player, new Vector3(8f, -4.4f, 1f), transform.rotation);
+            GameObject player4_object = PhotonNetwork.Instantiate("player", new Vector3(8f, -4.4f, 1f), transform.rotation);
             player4 = player4_object.GetComponent<Player>();
             player4.table = this;
             order.AddLast(player4);

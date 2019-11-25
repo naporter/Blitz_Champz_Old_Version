@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+using Photon;
+using Photon.Pun;
+
 public class Player : MonoBehaviour {
 	public int score;
 	public List<GameObject> hand;
@@ -11,7 +14,9 @@ public class Player : MonoBehaviour {
 	public bool right = false;
 	public bool up = false;
 	public bool valid = true;
+	PhotonView photonView;
 	void Start () {
+		photonView = gameObject.GetComponent<PhotonView>();
 		score = 0;
 		if (this.transform.position.x > 0) {
 			right = true;
