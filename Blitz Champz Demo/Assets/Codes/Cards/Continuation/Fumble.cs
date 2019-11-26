@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
 public class Fumble : Continuation_Card
 {
     void Start()
     {
         
     }
+    [PunRPC]
     protected override void Play() {
         owner.table.Skip();
         AdvanceTurn();

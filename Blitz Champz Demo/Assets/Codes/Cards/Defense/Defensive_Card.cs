@@ -23,6 +23,7 @@ public class Defensive_Card : Card {
 	public bool GetRun() {
 		return run;
 	}
+	[PunRPC]
 	protected override void Play() {
 		owner.table.last_card.Remove();
 		AdvanceTurn();
@@ -30,14 +31,15 @@ public class Defensive_Card : Card {
 	private void OnMouseUpAsButton() {
 		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner.table.current_player == owner) {
             if (CheckValid()) {
-				this.Play();
-                this.Discard();
+				this.photonView.RPC("Play", RpcTarget.All);
+                this.photonView.RPC("Discard", RpcTarget.All);
+				owner.drawn = false;
             } else {
 				if (owner.GetValid()) {
                 	Debug.Log("Not a valid move");
 				} else {
 					AdvanceTurn();
-					this.Discard();
+					this.photonView.RPC("Discard", RpcTarget.All);
 				}
             }
 		}

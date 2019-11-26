@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
 public class Five_Yard_Run : Continuation_Card
 {
     void Start() {
     }
+    [PunRPC]
     protected override void Play() {
         owner.Draw();
         AdvanceTurn();

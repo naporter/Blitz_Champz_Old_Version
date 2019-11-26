@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
 public class Pass_Completion : Continuation_Card
 {
     void Start() {
     }
+    [PunRPC]
     protected override void Play() {
         owner.Draw();
         AdvanceTurn();

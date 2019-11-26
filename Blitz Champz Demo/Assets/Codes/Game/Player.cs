@@ -7,6 +7,7 @@ using Photon;
 using Photon.Pun;
 
 public class Player : MonoBehaviourPunCallbacks {
+	public bool drawn = false;
 	public int score;
 	public List<GameObject> hand;
 	public List<GameObject> field;
@@ -40,10 +41,11 @@ public class Player : MonoBehaviourPunCallbacks {
 		GameObject new_card = PhotonView.Find(ID).gameObject;
 		new_card.GetComponent<Card>().SetOwner(this);
 		hand.Add(new_card);
-		OrderCards();
+		photonView.RPC("OrderCards", RpcTarget.All);
 	}
 	public void Draw() {
-		if (PhotonNetwork.IsMasterClient){
+		if (PhotonNetwork.IsMasterClient && this == table.current_player){
+			Debug.Log("Drawing from master client" + PhotonNetwork.LocalPlayer.UserId);
 			Deck draw_deck = table.draw_deck;
 			GameObject new_card = draw_deck.Draw();
 			int ID = new_card.GetComponent<PhotonView>().ViewID;
@@ -64,6 +66,7 @@ public class Player : MonoBehaviourPunCallbacks {
 		hand.Remove(card);
 	}
 	public void StackCards() {
+		
 		for (int i = 0; i < hand.Count; i++) {
 			hand[i].transform.position = gameObject.transform.position;
 			hand[i].GetComponent<Card>().Hide();
@@ -88,6 +91,7 @@ public class Player : MonoBehaviourPunCallbacks {
 			}
 		}
 	}
+	[PunRPC]
 	public void OrderCards() {
 		if (CheckValid() == false) {
 			Debug.Log("No valid cards. Discard please.");
@@ -97,9 +101,14 @@ public class Player : MonoBehaviourPunCallbacks {
 				Vector3 adjustment = new Vector3(-1 * 0.5f * i, 0.0f, 0.0f);
 				hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * i;
 				hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * (hand.Count - i));
+				if (up) {
+					hand[i].transform.rotation = Quaternion.Euler(0,0,180f);
+				}
 				hand[i].GetComponent<BoxCollider>().enabled = true;
 				if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && this == table.current_player) {
 					hand[i].GetComponent<Card>().Show();
+				} else {
+					hand[i].GetComponent<Card>().Hide();
 				}
 			}
 		}
@@ -108,6 +117,9 @@ public class Player : MonoBehaviourPunCallbacks {
 				Vector3 adjustment = new Vector3(0.5f * i, 0.0f, 0.0f);
 				hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * (hand.Count - i);
 				hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * i);
+				if (up) {
+					hand[i].transform.rotation = Quaternion.Euler(0,0,180f);
+				}
 				hand[i].GetComponent<BoxCollider>().enabled = true;
 				if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && this == table.current_player) {
 					hand[i].GetComponent<Card>().Show();

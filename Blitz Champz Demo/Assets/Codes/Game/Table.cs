@@ -195,10 +195,9 @@ public class Table : MonoBehaviourPunCallbacks
     }
     public void AdvanceTurn() {
         Debug.Log("Turn advanced");
-        if (PhotonNetwork.IsMasterClient){
-            photonView.RPC("SyncTable", RpcTarget.All, current.Value.gameObject.GetComponent<PhotonView>().ViewID, reversed);
-        }
+        photonView.RPC("SyncTable", RpcTarget.All, current.Value.gameObject.GetComponent<PhotonView>().ViewID, reversed);
         photonView.RPC("Advance", RpcTarget.All);
+        current_player.Draw();
     }
     
     IEnumerator NextPlayer() {
@@ -209,7 +208,9 @@ public class Table : MonoBehaviourPunCallbacks
             current = current.Next ?? current.List.First;
         }
         current_player = current.Value;
-        current_player.Draw();
+        if (PhotonNetwork.IsMasterClient) {
+            
+        }
         yield return new WaitUntil(() => ready);
         Update_Scores();
     }

@@ -39,5 +39,8 @@ MonoBehaviour:
   - UpdateTable
   - Advance
   - SyncTable
+  - Discard
+  - Play
+  - OrderCards
   DisableAutoOpenWizard: 1
   ShowSettings: 0

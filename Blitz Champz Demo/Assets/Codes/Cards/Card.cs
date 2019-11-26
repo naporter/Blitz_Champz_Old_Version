@@ -21,7 +21,8 @@ public class Card : MonoBehaviourPunCallbacks {
 	}
 	void Start () {
 	}
-	public void Discard () {
+	[PunRPC]
+		public void Discard () {
 		if (this.owner != null) {
 			for (int i = 0; i < owner.hand.Count; i++) {
 				owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
@@ -46,8 +47,8 @@ public class Card : MonoBehaviourPunCallbacks {
 	}
 	private void OnMouseUpAsButton() {
 		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner.table.current_player == owner) {
-			this.Play();
-			this.Discard();
+			this.photonView.RPC("Play", RpcTarget.All);
+			this.photonView.RPC("Discard", RpcTarget.All);
 		}
 	}
 	void OnMouseEnter() {
@@ -120,6 +121,7 @@ public class Card : MonoBehaviourPunCallbacks {
 			}
 		}
 	}
+	[PunRPC]
 	protected virtual void Play () {
 	}
 	void Update () {
