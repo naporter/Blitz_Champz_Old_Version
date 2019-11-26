@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
 public class Offensive_Card : Card {
 	protected int value;
 	protected bool kick = false;
@@ -37,7 +38,7 @@ public class Offensive_Card : Card {
 		Discard();
 	}
 	private void OnMouseUpAsButton() {
-		if (owner != null && owner.table.current_player == owner) {
+		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner.table.current_player == owner) {
 			this.Play();
 		}
 	}

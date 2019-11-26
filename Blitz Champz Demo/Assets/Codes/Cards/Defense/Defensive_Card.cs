@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
 public class Defensive_Card : Card {
 	protected bool kick = false;
 	protected bool pass = false;
@@ -27,7 +28,7 @@ public class Defensive_Card : Card {
 		AdvanceTurn();
 	}
 	private void OnMouseUpAsButton() {
-		if (owner != null && owner.table.current_player == owner) {
+		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner.table.current_player == owner) {
             if (CheckValid()) {
 				this.Play();
                 this.Discard();

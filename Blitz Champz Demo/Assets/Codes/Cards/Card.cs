@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
 
-public class Card : MonoBehaviour {
+public class Card : MonoBehaviourPunCallbacks {
 	public Player owner;
 	protected bool valid = true;
 	protected bool win_played = false;
+	
 	public void SetOwner(Player own) {
 		this.owner = own;
+		this.GetComponent<PhotonView>().TransferOwnership(own.GetComponent<PhotonView>().Owner);
 		if (owner.up) {
 			gameObject.transform.rotation = Quaternion.Euler(0,0,180f);
 		}
@@ -42,13 +45,13 @@ public class Card : MonoBehaviour {
 		owner.table.AdvanceTurn();
 	}
 	private void OnMouseUpAsButton() {
-		if (owner != null && owner.table.current_player == owner) {
+		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner.table.current_player == owner) {
 			this.Play();
 			this.Discard();
 		}
 	}
 	void OnMouseEnter() {
-		if (owner != null && owner == owner.table.current_player) {
+		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null) {
 			if (owner.hand.Contains(gameObject)) {
 				gameObject.transform.position += Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
 				gameObject.GetComponent<SpriteRenderer>().sortingOrder +=20;
@@ -85,7 +88,7 @@ public class Card : MonoBehaviour {
 		}
 	}
 	void OnMouseExit() {
-		if (owner != null && owner == owner.table.current_player) {
+		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null) {
 			if (owner.hand.Contains(gameObject)) {
 				gameObject.transform.position -= Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
 				gameObject.GetComponent<SpriteRenderer>().sortingOrder -=20;

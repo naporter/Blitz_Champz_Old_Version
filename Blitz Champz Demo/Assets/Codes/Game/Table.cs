@@ -11,6 +11,7 @@ using Photon.Pun.Demo.PunBasics;
 
 public class Table : MonoBehaviourPunCallbacks
 {
+    
     public Deck draw_deck;
     public List<GameObject> discard;
     public Offensive_Card last_card;
@@ -28,11 +29,12 @@ public class Table : MonoBehaviourPunCallbacks
     public GameObject gameOver;
     private bool reversed = false;
     private bool ready = true;
-    LinkedListNode<Player> current;
+    public LinkedListNode<Player> current;
     public LinkedList<Player> order = new LinkedList<Player>();
     public LinkedList<Photon.Realtime.Player> temp_order = new LinkedList<Photon.Realtime.Player>();
     public LinkedListNode<Photon.Realtime.Player> temp_current;
     void Start() {
+        player_count = Manager.PlayerCount;
         if (PlayerManager.LocalPlayerInstance == null && PhotonNetwork.IsMasterClient) {
             Debug.Log("B");
             foreach(Photon.Realtime.Player p in PhotonNetwork.PlayerList) {
@@ -41,7 +43,7 @@ public class Table : MonoBehaviourPunCallbacks
             temp_current = temp_order.First;
             for (int a = 0; a < temp_order.Count; a++) {
                 Debug.Log("A");
-                if (temp_current.Value.NickName == PhotonNetwork.NickName) {
+                if (temp_current.Value == PhotonNetwork.LocalPlayer) {
                     Debug.Log("This player equals this player");
                     GameObject player1_object = PhotonNetwork.Instantiate("player", new Vector3(-8f, -4.4f, 1f), transform.rotation);
                     player1 = player1_object.GetComponent<Player>();
@@ -52,14 +54,14 @@ public class Table : MonoBehaviourPunCallbacks
                         Debug.Log(b);
                         Debug.Log("C");
                         if (b == 0) {
-                            GameObject player2_object = PhotonNetwork.Instantiate("player", new Vector3(-8f, 4.4f, 1f), transform.rotation);
+                            GameObject player2_object = PhotonNetwork.Instantiate("player", new Vector3(-8f, 4.4f, 1f), Quaternion.Euler(0,0,180f));
                             player2 = player2_object.GetComponent<Player>();
                             order.AddLast(player2);
                             player2.table = this;
                             player2_object.GetComponent<PhotonView>().TransferOwnership(temp_current.Value);
                             temp_current = temp_current.Next ?? temp_current.List.First;
                         } else if (b == 1) {
-                            GameObject player3_object = PhotonNetwork.Instantiate("player", new Vector3(8f, 4.4f, 1f), transform.rotation);
+                            GameObject player3_object = PhotonNetwork.Instantiate("player", new Vector3(8f, 4.4f, 1f), Quaternion.Euler(0,0,180f));
                             player3 = player3_object.GetComponent<Player>();
                             order.AddLast(player3);
                             player3.table = this;
@@ -78,14 +80,57 @@ public class Table : MonoBehaviourPunCallbacks
                     temp_current = temp_current.Next ?? temp_current.List.First;
                 }
             }
-            player_count = Manager.PlayerCount;
+            if (order.Count == 2){
+                photonView.RPC("UpdateTable", RpcTarget.Others, player1.gameObject.GetComponent<PhotonView>().ViewID, player2.gameObject.GetComponent<PhotonView>().ViewID);
+                Debug.Log("Table updated");
+            } else if (order.Count == 3) {
+                photonView.RPC("UpdateTable", RpcTarget.Others, player1.gameObject.GetComponent<PhotonView>().ViewID, player2.gameObject.GetComponent<PhotonView>().ViewID, player3.gameObject.GetComponent<PhotonView>().ViewID);
+            } else if (order.Count == 4) {
+                photonView.RPC("UpdateTable", RpcTarget.Others, player1.gameObject.GetComponent<PhotonView>().ViewID, player2.gameObject.GetComponent<PhotonView>().ViewID, player3.gameObject.GetComponent<PhotonView>().ViewID, player4.gameObject.GetComponent<PhotonView>().ViewID);
+
+            }
             Create_Deck();
             //Create_Players();
-            current = order.First;
-            current_player = player1;
+            current = order.Last;
+            current_player = current.Value;
             StartCoroutine(Wait_For_Deck());
         }
         
+    }
+    [PunRPC]
+    void UpdateTable(int a, int b) {
+        player1 = PhotonView.Find(a).gameObject.GetComponent<Player>(); 
+        player2 = PhotonView.Find(b).gameObject.GetComponent<Player>();
+        player1.table = this; player2.table = this;
+        order.AddLast(player1); order.AddLast(player2);
+        current = order.First;
+        current_player = player1;
+    }
+    [PunRPC]
+    void UpdateTable(int a, int b, int c) {
+        player1 = PhotonView.Find(a).gameObject.GetComponent<Player>(); 
+        player2 = PhotonView.Find(b).gameObject.GetComponent<Player>();
+        player3 = PhotonView.Find(c).gameObject.GetComponent<Player>(); 
+        player1.table = this; player2.table = this; player3.table = this;
+        order.AddLast(player1); order.AddLast(player2); order.AddLast(player3);
+        current = order.First;
+        current_player = player1;
+    }
+    [PunRPC]
+    void UpdateTable(int a, int b, int c, int d) {
+        player1 = PhotonView.Find(a).gameObject.GetComponent<Player>(); 
+        player2 = PhotonView.Find(b).gameObject.GetComponent<Player>();
+        player3 = PhotonView.Find(c).gameObject.GetComponent<Player>(); 
+        player4 = PhotonView.Find(d).gameObject.GetComponent<Player>();
+        player1.table = this; player2.table = this; player3.table = this; player4.table = this;
+        order.AddLast(player1); order.AddLast(player2); order.AddLast(player3); order.AddLast(player4);
+        current = order.Last;
+        current_player = current.Value;
+    }
+    [PunRPC]
+    void SyncTable(int a, bool b) {
+        current = order.Find(PhotonView.Find(a).gameObject.GetComponent<Player>());
+        reversed = b;
     }
     public void Discard(GameObject card) {
         card.GetComponent<SpriteRenderer>().sortingOrder = discard.Count;
@@ -129,7 +174,7 @@ public class Table : MonoBehaviourPunCallbacks
     private void Create_Deck() {
         Debug.Log("Deck start");
         GameObject deck = Resources.Load("Prefabs/deck") as GameObject;
-        GameObject new_deck = Instantiate(deck, new Vector3(1.45f, 0f, 1f), transform.rotation);
+        GameObject new_deck = PhotonNetwork.InstantiateSceneObject("deck", new Vector3(1.45f, 0f, 1f), transform.rotation);
         draw_deck = new_deck.GetComponent<Deck>();
         Debug.Log("Deck done");
     }
@@ -141,11 +186,21 @@ public class Table : MonoBehaviourPunCallbacks
             AdvanceTurn();
         }
         AdvanceTurn();
+        photonView.RPC("SyncTable", RpcTarget.All, current.Value.gameObject.GetComponent<PhotonView>().ViewID, reversed);
         Debug.Log("Dealing done");
     }
-    public void AdvanceTurn() {
+    [PunRPC]
+    void Advance() {
         StartCoroutine(NextPlayer());
     }
+    public void AdvanceTurn() {
+        Debug.Log("Turn advanced");
+        if (PhotonNetwork.IsMasterClient){
+            photonView.RPC("SyncTable", RpcTarget.All, current.Value.gameObject.GetComponent<PhotonView>().ViewID, reversed);
+        }
+        photonView.RPC("Advance", RpcTarget.All);
+    }
+    
     IEnumerator NextPlayer() {
         current_player.StackCards();
         if (reversed) {

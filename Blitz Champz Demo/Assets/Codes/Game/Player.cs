@@ -6,7 +6,7 @@ using TMPro;
 using Photon;
 using Photon.Pun;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviourPunCallbacks {
 	public int score;
 	public List<GameObject> hand;
 	public List<GameObject> field;
@@ -14,9 +14,7 @@ public class Player : MonoBehaviour {
 	public bool right = false;
 	public bool up = false;
 	public bool valid = true;
-	PhotonView photonView;
 	void Start () {
-		photonView = gameObject.GetComponent<PhotonView>();
 		score = 0;
 		if (this.transform.position.x > 0) {
 			right = true;
@@ -37,14 +35,28 @@ public class Player : MonoBehaviour {
 		}
 		return score;
 	}
+	[PunRPC]
+	void AddCard(int ID) {
+		GameObject new_card = PhotonView.Find(ID).gameObject;
+		new_card.GetComponent<Card>().SetOwner(this);
+		hand.Add(new_card);
+		OrderCards();
+	}
 	public void Draw() {
-		Deck draw_deck = table.draw_deck;
+		if (PhotonNetwork.IsMasterClient){
+			Deck draw_deck = table.draw_deck;
+			GameObject new_card = draw_deck.Draw();
+			int ID = new_card.GetComponent<PhotonView>().ViewID;
+			photonView.RPC("AddCard", RpcTarget.All, ID);
+		}
+		/*
 		if (draw_deck.draw_deck.Count > 0 && table.current_player == this) {
-			GameObject new_card = draw_deck.Draw(this);
+			GameObject new_card = draw_deck.Draw();
 			new_card.GetComponent<Card>().SetOwner(this);
 			hand.Add(new_card);
 		}
-		OrderCards();
+		*/
+		
 	}
 
 	public void Remove(GameObject card) {
@@ -86,7 +98,7 @@ public class Player : MonoBehaviour {
 				hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * i;
 				hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * (hand.Count - i));
 				hand[i].GetComponent<BoxCollider>().enabled = true;
-				if (this == table.current_player) {
+				if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && this == table.current_player) {
 					hand[i].GetComponent<Card>().Show();
 				}
 			}
@@ -97,7 +109,7 @@ public class Player : MonoBehaviour {
 				hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * (hand.Count - i);
 				hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * i);
 				hand[i].GetComponent<BoxCollider>().enabled = true;
-				if (this == table.current_player) {
+				if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && this == table.current_player) {
 					hand[i].GetComponent<Card>().Show();
 				}
 			}

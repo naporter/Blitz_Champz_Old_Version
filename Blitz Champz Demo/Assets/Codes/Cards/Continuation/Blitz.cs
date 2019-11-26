@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
 public class Blitz : Continuation_Card
 {
     private bool played = false;
@@ -99,7 +100,7 @@ public class Blitz : Continuation_Card
     }
     private void OnMouseUpAsButton() {
 		bool canPlay = CheckValid();
-        if (owner != null && owner.table.current_player == owner) {
+        if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner.table.current_player == owner) {
 			if (canPlay) {
                 StartCoroutine(SelectCard());
             }
@@ -114,7 +115,7 @@ public class Blitz : Continuation_Card
 		}
 	}
     void OnMouseExit() {
-		if (owner != null && owner == owner.table.current_player && !played) {
+		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner == owner.table.current_player && !played) {
 			if (owner.hand.Contains(gameObject)) {
 				gameObject.transform.position -= Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
 				gameObject.GetComponent<SpriteRenderer>().sortingOrder -=20;
