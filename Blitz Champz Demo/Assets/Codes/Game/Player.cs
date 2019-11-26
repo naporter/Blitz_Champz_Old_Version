@@ -7,7 +7,6 @@ using Photon;
 using Photon.Pun;
 
 public class Player : MonoBehaviourPunCallbacks {
-	public bool drawn = false;
 	public int score;
 	public List<GameObject> hand;
 	public List<GameObject> field;
@@ -51,16 +50,16 @@ public class Player : MonoBehaviourPunCallbacks {
 			int ID = new_card.GetComponent<PhotonView>().ViewID;
 			photonView.RPC("AddCard", RpcTarget.All, ID);
 		}
-		/*
-		if (draw_deck.draw_deck.Count > 0 && table.current_player == this) {
-			GameObject new_card = draw_deck.Draw();
-			new_card.GetComponent<Card>().SetOwner(this);
-			hand.Add(new_card);
-		}
-		*/
-		
 	}
-
+	public void ReclaimOthers() {
+		photonView.RPC("Reclaim", RpcTarget.Others);
+	}
+	[PunRPC]
+	void Reclaim() {
+		foreach (GameObject a in field) {
+			a.GetComponent<PhotonView>().RequestOwnership();
+		}
+	}
 	public void Remove(GameObject card) {
 		field.Remove(card);
 		hand.Remove(card);
@@ -123,6 +122,8 @@ public class Player : MonoBehaviourPunCallbacks {
 				hand[i].GetComponent<BoxCollider>().enabled = true;
 				if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && this == table.current_player) {
 					hand[i].GetComponent<Card>().Show();
+				} else {
+					hand[i].GetComponent<Card>().Hide();
 				}
 			}
 		}

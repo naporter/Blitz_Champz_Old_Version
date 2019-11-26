@@ -42,5 +42,7 @@ MonoBehaviour:
   - Discard
   - Play
   - OrderCards
+  - Show
+  - Reclaim
   DisableAutoOpenWizard: 1
   ShowSettings: 0

@@ -325,7 +325,7 @@ ScriptsOnlyBuild:
     className: SmoothSyncMovement
   - hash:
       serializedVersion: 2
-      Hash: cc5b9db2523188b562e994f5b83f4618
+      Hash: 3bb8cd86c39de95c283d487bed263e5e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
@@ -643,7 +643,7 @@ ScriptsOnlyBuild:
     className: PhotonHandler
   - hash:
       serializedVersion: 2
-      Hash: 3a3f9b6d3063756a8855f466958685c6
+      Hash: b86ea92a267dff594436d2ae4cdb023a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Table

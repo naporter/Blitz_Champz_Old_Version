@@ -117,6 +117,7 @@ public class Deck : MonoBehaviour
         int random_num = Random.Range(0, draw_deck.Count);
         GameObject drawn_card = draw_deck[random_num];
         draw_deck.RemoveAt(random_num);
+        drawn_card.GetComponent<Card>().Hide();
         return drawn_card;
     }
     private void OnMouseUpAsButton() {

@@ -39,7 +39,8 @@ public class Offensive_Card : Card {
 		this.photonView.RPC("Discard", RpcTarget.All);
 	}
 	private void OnMouseUpAsButton() {
-		if ((gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner.table.current_player == owner) ) { //| (owner == owner.table.current_player) second case is for when blitz is played
+		if ((gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner.table.current_player == owner) || (owner == owner.table.current_player && !owner.table.ready && owner.gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer)) { //| (owner == owner.table.current_player) second case is for when blitz is played
+
 			this.photonView.RPC("Play", RpcTarget.All);
 		}
 	}

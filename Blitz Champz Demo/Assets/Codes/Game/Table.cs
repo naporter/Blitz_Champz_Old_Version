@@ -28,13 +28,12 @@ public class Table : MonoBehaviourPunCallbacks
     public Player current_player;
     public GameObject gameOver;
     private bool reversed = false;
-    private bool ready = true;
+    public bool ready = true;
     public LinkedListNode<Player> current;
     public LinkedList<Player> order = new LinkedList<Player>();
     public LinkedList<Photon.Realtime.Player> temp_order = new LinkedList<Photon.Realtime.Player>();
     public LinkedListNode<Photon.Realtime.Player> temp_current;
     void Start() {
-        player_count = Manager.PlayerCount;
         if (PlayerManager.LocalPlayerInstance == null && PhotonNetwork.IsMasterClient) {
             Debug.Log("B");
             foreach(Photon.Realtime.Player p in PhotonNetwork.PlayerList) {
@@ -89,6 +88,7 @@ public class Table : MonoBehaviourPunCallbacks
                 photonView.RPC("UpdateTable", RpcTarget.Others, player1.gameObject.GetComponent<PhotonView>().ViewID, player2.gameObject.GetComponent<PhotonView>().ViewID, player3.gameObject.GetComponent<PhotonView>().ViewID, player4.gameObject.GetComponent<PhotonView>().ViewID);
 
             }
+            player_count = order.Count;
             Create_Deck();
             //Create_Players();
             current = order.Last;
@@ -105,6 +105,7 @@ public class Table : MonoBehaviourPunCallbacks
         order.AddLast(player1); order.AddLast(player2);
         current = order.First;
         current_player = player1;
+        player_count = 2;
     }
     [PunRPC]
     void UpdateTable(int a, int b, int c) {
@@ -115,6 +116,7 @@ public class Table : MonoBehaviourPunCallbacks
         order.AddLast(player1); order.AddLast(player2); order.AddLast(player3);
         current = order.First;
         current_player = player1;
+        player_count = 3;
     }
     [PunRPC]
     void UpdateTable(int a, int b, int c, int d) {
@@ -126,6 +128,7 @@ public class Table : MonoBehaviourPunCallbacks
         order.AddLast(player1); order.AddLast(player2); order.AddLast(player3); order.AddLast(player4);
         current = order.Last;
         current_player = current.Value;
+        player_count = 4;
     }
     [PunRPC]
     void SyncTable(int a, bool b) {
@@ -213,6 +216,7 @@ public class Table : MonoBehaviourPunCallbacks
         }
         yield return new WaitUntil(() => ready);
         Update_Scores();
+        current_player.OrderCards();
     }
     public void Skip() {
         current_player.StackCards();

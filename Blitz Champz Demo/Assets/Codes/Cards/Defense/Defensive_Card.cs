@@ -33,7 +33,6 @@ public class Defensive_Card : Card {
             if (CheckValid()) {
 				this.photonView.RPC("Play", RpcTarget.All);
                 this.photonView.RPC("Discard", RpcTarget.All);
-				owner.drawn = false;
             } else {
 				if (owner.GetValid()) {
                 	Debug.Log("Not a valid move");

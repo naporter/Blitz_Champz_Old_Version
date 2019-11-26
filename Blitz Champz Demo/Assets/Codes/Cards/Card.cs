@@ -52,7 +52,7 @@ public class Card : MonoBehaviourPunCallbacks {
 		}
 	}
 	void OnMouseEnter() {
-		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null) {
+		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner == owner.table.current_player) {
 			if (owner.hand.Contains(gameObject)) {
 				gameObject.transform.position += Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
 				gameObject.GetComponent<SpriteRenderer>().sortingOrder +=20;
@@ -100,7 +100,7 @@ public class Card : MonoBehaviourPunCallbacks {
 				} else {
 					gameObject.GetComponent<SpriteRenderer>().color = Color.white;
 				}
-			} else {
+			} else if (owner != null && owner == owner.table.current_player && !owner.table.ready){
 				foreach(Player a in owner.table.order) {
 					if (owner != a && a.field.Contains(gameObject)) {
 						foreach(Player b in owner.table.order) {

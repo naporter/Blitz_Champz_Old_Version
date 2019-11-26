@@ -25,6 +25,7 @@ public class Blitz : Continuation_Card
         valid = false;
         return false;
     }
+    [PunRPC]
     protected override void Play() {
         StartCoroutine(SelectCard());
     }
@@ -33,7 +34,7 @@ public class Blitz : Continuation_Card
         Player winner = null;
         owner.table.SetReady(false);
         foreach (GameObject card in owner.hand) {
-                    card.GetComponent<BoxCollider>().enabled = false;
+            card.GetComponent<BoxCollider>().enabled = false;
         }
         foreach (Player a in owner.table.order) {
             if (owner != a && a.UpdateScore() >= 21) {
@@ -48,12 +49,14 @@ public class Blitz : Continuation_Card
                     foreach (GameObject card in a.field) {
                         if ((temp_score - 21) < card.GetComponent<Offensive_Card>().GetValue()){
                             card.GetComponent<Card>().owner = owner;
+                            card.GetComponent<PhotonView>().RequestOwnership();
                             card.GetComponent<BoxCollider>().enabled = true;
                         }
                     }
                 } else if (!losing) {
                     foreach (GameObject card in a.field) {
                         card.GetComponent<Card>().owner = owner;
+                        card.GetComponent<PhotonView>().RequestOwnership();
                         card.GetComponent<BoxCollider>().enabled = true;
                     }
                 }
@@ -61,7 +64,7 @@ public class Blitz : Continuation_Card
         }
         played = true; //this is used to disable the OnMouseExit() method so that it doesn't lighten the cards
         gameObject.GetComponent<BoxCollider>().enabled = false;
-        Show();
+        photonView.RPC("Show", RpcTarget.All);
         gameObject.transform.position += Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
         gameObject.GetComponent<SpriteRenderer>().sortingOrder +=20;
         for (int i = 0; i < owner.hand.Count; i++) {
@@ -88,6 +91,7 @@ public class Blitz : Continuation_Card
                 }
             }
         }
+        owner.ReclaimOthers();
         for (int i = 0; i < owner.hand.Count; i++) {
 			owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
 		}
@@ -102,7 +106,7 @@ public class Blitz : Continuation_Card
 		bool canPlay = CheckValid();
         if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner.table.current_player == owner) {
 			if (canPlay) {
-                StartCoroutine(SelectCard());
+                photonView.RPC("Play", RpcTarget.All);
             }
             else {
                 if (owner.GetValid()) {
@@ -115,7 +119,7 @@ public class Blitz : Continuation_Card
 		}
 	}
     void OnMouseExit() {
-		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner == owner.table.current_player && !played) {
+		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && !played) {
 			if (owner.hand.Contains(gameObject)) {
 				gameObject.transform.position -= Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
 				gameObject.GetComponent<SpriteRenderer>().sortingOrder -=20;
@@ -134,6 +138,7 @@ public class Blitz : Continuation_Card
 			}
 		}
 	}
+    [PunRPC]
 	public override void Show() {
         gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/blitz");
     }
@@ -148,7 +153,7 @@ public class Blitz : Continuation_Card
 			owner.Remove(gameObject);
 			this.owner = null;
 			Destroy(GetComponent<BoxCollider>());
-			Show();
+			photonView.RPC("Show", RpcTarget.All);
 		}
 	}
     void Update()
