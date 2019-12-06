@@ -92,38 +92,40 @@ public class Player : MonoBehaviourPunCallbacks {
 	}
 	[PunRPC]
 	public void OrderCards() {
-		if (CheckValid() == false) {
-			Debug.Log("No valid cards. Discard please.");
-		}
-		if (right) {
-			for (int i = 0; i < hand.Count; i++) {
-				Vector3 adjustment = new Vector3(-1 * 0.5f * i, 0.0f, 0.0f);
-				hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * i;
-				hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * (hand.Count - i));
-				if (up) {
-					hand[i].transform.rotation = Quaternion.Euler(0,0,180f);
-				}
-				hand[i].GetComponent<BoxCollider>().enabled = true;
-				if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && this == table.current_player) {
-					hand[i].GetComponent<Card>().Show();
-				} else {
-					hand[i].GetComponent<Card>().Hide();
+		if (table.current_player == this) {
+			if (CheckValid() == false) {
+				Debug.Log("No valid cards. Discard please.");
+			}
+			if (right) {
+				for (int i = 0; i < hand.Count; i++) {
+					Vector3 adjustment = new Vector3(-1 * 0.5f * i, 0.0f, 0.0f);
+					hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * i;
+					hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * (hand.Count - i));
+					if (up) {
+						hand[i].transform.rotation = Quaternion.Euler(0,0,180f);
+					}
+					hand[i].GetComponent<BoxCollider>().enabled = true;
+					if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && this == table.current_player) {
+						hand[i].GetComponent<Card>().Show();
+					} else {
+						hand[i].GetComponent<Card>().Hide();
+					}
 				}
 			}
-		}
-		else {
-			for (int i = 0; i < hand.Count; i++) {
-				Vector3 adjustment = new Vector3(0.5f * i, 0.0f, 0.0f);
-				hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * (hand.Count - i);
-				hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * i);
-				if (up) {
-					hand[i].transform.rotation = Quaternion.Euler(0,0,180f);
-				}
-				hand[i].GetComponent<BoxCollider>().enabled = true;
-				if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && this == table.current_player) {
-					hand[i].GetComponent<Card>().Show();
-				} else {
-					hand[i].GetComponent<Card>().Hide();
+			else {
+				for (int i = 0; i < hand.Count; i++) {
+					Vector3 adjustment = new Vector3(0.5f * i, 0.0f, 0.0f);
+					hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * (hand.Count - i);
+					hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * i);
+					if (up) {
+						hand[i].transform.rotation = Quaternion.Euler(0,0,180f);
+					}
+					hand[i].GetComponent<BoxCollider>().enabled = true;
+					if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && this == table.current_player) {
+						hand[i].GetComponent<Card>().Show();
+					} else {
+						hand[i].GetComponent<Card>().Hide();
+					}
 				}
 			}
 		}

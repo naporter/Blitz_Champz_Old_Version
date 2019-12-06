@@ -54,7 +54,7 @@ public class Card : MonoBehaviourPunCallbacks {
 	void OnMouseEnter() {
 		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner == owner.table.current_player) {
 			if (owner.hand.Contains(gameObject)) {
-				gameObject.transform.position += Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
+				gameObject.transform.position = new Vector3(gameObject.transform.position.x, owner.transform.position.y, gameObject.transform.position.z) +  Vector3.Scale(owner.transform.up, new Vector3(0f, 0.5f, 0f));
 				gameObject.GetComponent<SpriteRenderer>().sortingOrder +=20;
 				for (int i = 0; i < owner.hand.Count; i++) {
 					if (owner.hand[i] != gameObject) {
@@ -91,7 +91,7 @@ public class Card : MonoBehaviourPunCallbacks {
 	void OnMouseExit() {
 		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null) {
 			if (owner.hand.Contains(gameObject)) {
-				gameObject.transform.position -= Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
+				gameObject.transform.position = new Vector3(gameObject.transform.position.x, owner.transform.position.y, gameObject.transform.position.z);
 				gameObject.GetComponent<SpriteRenderer>().sortingOrder -=20;
 				if (!win_played){
 					for (int i = 0; i < owner.hand.Count; i++) {

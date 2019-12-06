@@ -12,9 +12,10 @@ public class First_Down : Continuation_Card
     }
     [PunRPC]
     protected override void Play() {
-        owner.Draw();
-        owner.Draw();
         AdvanceTurn();
+        owner.Draw();
+        owner.Draw();
+        owner.StackCards();
     }
 	public override void Show() {
         gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/first_down");

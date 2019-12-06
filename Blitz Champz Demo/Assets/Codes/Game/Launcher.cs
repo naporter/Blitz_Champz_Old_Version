@@ -39,6 +39,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     public string roomName = "";
     void Start()
     {
+        if (PhotonNetwork.IsConnected) {
+            PhotonNetwork.Disconnect();
+        }
         PlayerPrefs.DeleteAll();
 
         Debug.Log("Connecting to Photon Network");
@@ -87,7 +90,14 @@ public class Launcher : MonoBehaviourPunCallbacks
             PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, typedLobby); //4
         }
     }
-
+    public void JoinRandom() {
+        if (PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.LocalPlayer.NickName = playerName;
+            Debug.Log("Trying to join random lobby");
+            PhotonNetwork.JoinRandomRoom();
+        }
+    }
     public void LoadArena()
     {
         // 5

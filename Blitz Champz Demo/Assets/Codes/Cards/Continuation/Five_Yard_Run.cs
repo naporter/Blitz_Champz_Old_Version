@@ -9,8 +9,9 @@ public class Five_Yard_Run : Continuation_Card
     }
     [PunRPC]
     protected override void Play() {
-        owner.Draw();
         AdvanceTurn();
+        owner.Draw();
+        owner.StackCards();
     }
 	public override void Show() {
         gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/5_yard_run");
