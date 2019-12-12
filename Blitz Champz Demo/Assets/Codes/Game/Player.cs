@@ -140,7 +140,7 @@ public class Player : MonoBehaviourPunCallbacks {
 		}
 		valid = temp_valid;
 		return temp_valid;
-	}
+	} 
 	public bool StopWin() {
 		bool canStop = false;
 		foreach (GameObject a in hand) {
