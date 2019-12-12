@@ -7,7 +7,6 @@ public class Conversion : Offensive_Card
     void Start()
     {
         value = 2;
-		kick = false;
 		pass = true;
 		run = true;
     }

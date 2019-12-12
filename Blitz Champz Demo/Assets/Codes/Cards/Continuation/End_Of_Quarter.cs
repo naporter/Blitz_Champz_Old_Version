@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
 public class End_Of_Quarter : Continuation_Card
 {
     public string spriteName;
@@ -10,6 +11,7 @@ public class End_Of_Quarter : Continuation_Card
     {
         
     }
+    [PunRPC]
     protected override void Play() {
         owner.table.Reverse();
         AdvanceTurn();

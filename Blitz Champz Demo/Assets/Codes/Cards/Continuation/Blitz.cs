@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
 public class Blitz : Continuation_Card
 {
     private bool played = false;
@@ -9,25 +10,61 @@ public class Blitz : Continuation_Card
     {
         
     }
+    public void SetPlayed(bool a) {
+		win_played = a;
+	}
+    public override bool CheckValid() {
+        foreach (Player a in owner.table.order) {
+            if (a != owner) {
+                if (a.field.Count > 0) {
+                    valid = true;
+                    return true;
+                }
+            }
+        }
+        valid = false;
+        return false;
+    }
+    [PunRPC]
     protected override void Play() {
         StartCoroutine(SelectCard());
     }
     IEnumerator SelectCard() {
+        bool losing = false;
+        Player winner = null;
         owner.table.SetReady(false);
         foreach (GameObject card in owner.hand) {
-                    card.GetComponent<BoxCollider>().enabled = false;
+            card.GetComponent<BoxCollider>().enabled = false;
+        }
+        foreach (Player a in owner.table.order) {
+            if (owner != a && a.UpdateScore() >= 21) {
+                losing = true;
+                winner = a;
+            }
         }
         foreach (Player a in owner.table.order) {
             if (owner != a) {
-                foreach (GameObject card in a.field) {
-                    card.GetComponent<Card>().owner = owner;
-                    card.GetComponent<BoxCollider>().enabled = true;
+                if (losing && a == winner) {
+                    int temp_score = a.UpdateScore();
+                    foreach (GameObject card in a.field) {
+                        if ((temp_score - 21) < card.GetComponent<Offensive_Card>().GetValue()){
+                            card.GetComponent<Card>().owner = owner;
+                            card.GetComponent<PhotonView>().RequestOwnership();
+                            card.GetComponent<BoxCollider>().enabled = true;
+                        }
+                    }
+                } else if (!losing) {
+                    foreach (GameObject card in a.field) {
+                        card.GetComponent<Card>().owner = owner;
+                        card.GetComponent<PhotonView>().RequestOwnership();
+                        card.GetComponent<BoxCollider>().enabled = true;
+                    }
                 }
             }
         }
         played = true; //this is used to disable the OnMouseExit() method so that it doesn't lighten the cards
         gameObject.GetComponent<BoxCollider>().enabled = false;
-        Show();
+        photonView.RPC("Show", RpcTarget.All);
         gameObject.transform.position += Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
         gameObject.GetComponent<SpriteRenderer>().sortingOrder +=20;
         for (int i = 0; i < owner.hand.Count; i++) {
@@ -50,40 +87,39 @@ public class Blitz : Continuation_Card
                 }
                 if (stolenCard) {
                     a.field.Remove(stolenCard);
-                    a.order_field();
+                    a.OrderField();
                 }
             }
         }
+        owner.ReclaimOthers();
         for (int i = 0; i < owner.hand.Count; i++) {
 			owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
 		}
         foreach (GameObject card in owner.hand) {
             card.GetComponent<BoxCollider>().enabled = true;
         }
-        owner.order_field();
+        owner.OrderField();
         owner.table.SetReady(true);
         this.Discard();
     }
     private void OnMouseUpAsButton() {
-		bool canPlay = false;
-        foreach (Player a in owner.table.order) {
-            if (a != owner) {
-                if (a.field.Count > 0) {
-                    canPlay = true;
-                }
-            }
-        }
-        if (owner != null && owner.table.current_player == owner) {
+		bool canPlay = CheckValid();
+        if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner.table.current_player == owner) {
 			if (canPlay) {
-                StartCoroutine(SelectCard());
+                photonView.RPC("Play", RpcTarget.All);
             }
             else {
-                Debug.Log("Not a valid move!");
+                if (owner.GetValid()) {
+                	Debug.Log("Not a valid move");
+				} else {
+					AdvanceTurn();
+					this.Discard();
+				}
             }
 		}
 	}
     void OnMouseExit() {
-		if (owner != null && owner == owner.table.current_player && !played) {
+		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && !played) {
 			if (owner.hand.Contains(gameObject)) {
 				gameObject.transform.position -= Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
 				gameObject.GetComponent<SpriteRenderer>().sortingOrder -=20;
@@ -102,6 +138,7 @@ public class Blitz : Continuation_Card
 			}
 		}
 	}
+    [PunRPC]
 	public override void Show() {
         gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/blitz");
     }
@@ -113,14 +150,13 @@ public class Blitz : Continuation_Card
 			gameObject.GetComponent<Transform>().position = new Vector3(-1.45f, 0f, 0f);
 			gameObject.transform.rotation = Quaternion.Euler(0,0,0f);
 			owner.table.Discard(gameObject);
-			owner.remove(gameObject);
+			owner.Remove(gameObject);
 			this.owner = null;
 			Destroy(GetComponent<BoxCollider>());
-			Show();
+			photonView.RPC("Show", RpcTarget.All);
 		}
 	}
     void Update()
     {
-        
     }
 }

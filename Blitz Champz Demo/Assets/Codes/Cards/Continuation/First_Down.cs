@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Photon.Pun;
 public class First_Down : Continuation_Card
 {
     // Start is called before the first frame update
@@ -9,10 +10,12 @@ public class First_Down : Continuation_Card
     {
         
     }
+    [PunRPC]
     protected override void Play() {
-        owner.draw();
-        owner.draw();
         AdvanceTurn();
+        owner.Draw();
+        owner.Draw();
+        owner.StackCards();
     }
 	public override void Show() {
         gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Cards/first_down");
