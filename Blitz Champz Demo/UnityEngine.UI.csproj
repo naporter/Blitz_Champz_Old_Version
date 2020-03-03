@@ -5,9 +5,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{41F45B08-7BD1-05FA-E074-6AC41C196AD4}</ProjectGuid>
+    <ProjectGuid>{BA355BDC-D9AC-4DF0-CBE7-0822160BAB0E}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Assembly-CSharp.dll</AssemblyName>
+    <AssemblyName>UnityEngine.UI.dll</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
@@ -231,6 +231,18 @@
     </Reference>
     <Reference Include="Managed/UnityEditor">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Managed/UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.VR">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>
@@ -579,69 +591,90 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Unity.Timeline.Editor.csproj">
-      <Project>{7C87BE25-0A2E-FC58-1E14-37330F289AA3}</Project>
-      <Name>Unity.Timeline.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VSCode.Editor.csproj">
-      <Project>{F37EB8D3-595B-2A8E-9D57-98253E4F534B}</Project>
-      <Name>Unity.VSCode.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
-      <Project>{3A848AB7-9891-EDDA-D555-BF184C2F81F4}</Project>
-      <Name>Unity.TextMeshPro.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{BA355BDC-D9AC-4DF0-CBE7-0822160BAB0E}</Project>
-      <Name>UnityEngine.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Timeline.csproj">
-      <Project>{6940CB9D-2F64-7CD4-BA0F-5610D5AB47B0}</Project>
-      <Name>Unity.Timeline</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.CollabProxy.Editor.csproj">
-      <Project>{C12CEEC6-100C-58A2-DE36-314E4DE5E40B}</Project>
-      <Name>Unity.CollabProxy.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Rider.Editor.csproj">
-      <Project>{C540080A-BED7-978E-DDFC-EE09E5DBB722}</Project>
-      <Name>Unity.Rider.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.TextMeshPro.csproj">
-      <Project>{07A21C90-D344-AE1A-8456-9910C203B41A}</Project>
-      <Name>Unity.TextMeshPro</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{3BB3FA27-B9AA-7EC6-4E7C-EE51EC3271F7}</Project>
-      <Name>UnityEditor.UI</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Assets\Codes\Cards\Card.cs" />
-    <Compile Include="Assets\Codes\Cards\Continuation\Blitz.cs" />
-    <Compile Include="Assets\Codes\Cards\Continuation\Continuation_Card.cs" />
-    <Compile Include="Assets\Codes\Cards\Continuation\End_Of_Quarter.cs" />
-    <Compile Include="Assets\Codes\Cards\Continuation\First_Down.cs" />
-    <Compile Include="Assets\Codes\Cards\Continuation\Five_Yard_Run.cs" />
-    <Compile Include="Assets\Codes\Cards\Continuation\Fumble.cs" />
-    <Compile Include="Assets\Codes\Cards\Continuation\Pass_Completion.cs" />
-    <Compile Include="Assets\Codes\Cards\Defense\Blocked_Kick.cs" />
-    <Compile Include="Assets\Codes\Cards\Defense\Defensive_Card.cs" />
-    <Compile Include="Assets\Codes\Cards\Defense\Interception.cs" />
-    <Compile Include="Assets\Codes\Cards\Defense\Tackle.cs" />
-    <Compile Include="Assets\Codes\Cards\Offense\Conversion.cs" />
-    <Compile Include="Assets\Codes\Cards\Offense\Extra_Point.cs" />
-    <Compile Include="Assets\Codes\Cards\Offense\Field_Goal.cs" />
-    <Compile Include="Assets\Codes\Cards\Offense\Hail_Mary.cs" />
-    <Compile Include="Assets\Codes\Cards\Offense\Offensive_Card.cs" />
-    <Compile Include="Assets\Codes\Cards\Offense\Passing_TD.cs" />
-    <Compile Include="Assets\Codes\Cards\Offense\Rushing_TD.cs" />
-    <Compile Include="Assets\Codes\Game\Deck.cs" />
-    <Compile Include="Assets\Codes\Game\Manager.cs" />
-    <Compile Include="Assets\Codes\Game\Player.cs" />
-    <Compile Include="Assets\Codes\Game\Table.cs" />
-    <Compile Include="Assets\Codes\Menus\GameOver.cs" />
-    <Compile Include="Assets\Codes\Menus\MainMenu.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\EventData\AxisEventData.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\EventData\BaseEventData.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\EventData\PointerEventData.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\EventHandle.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\EventInterfaces.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\EventSystem.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\EventTrigger.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\EventTriggerType.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\ExecuteEvents.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\InputModules\BaseInput.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\InputModules\BaseInputModule.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\InputModules\PointerInputModule.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\InputModules\StandaloneInputModule.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\InputModules\TouchInputModule.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\MoveDirection.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\RaycasterManager.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\Raycasters\BaseRaycaster.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\Raycasters\Physics2DRaycaster.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\Raycasters\PhysicsRaycaster.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\RaycastResult.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\UIBehaviour.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\Properties\AssemblyInfo.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Animation\CoroutineTween.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\AnimationTriggers.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Button.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\CanvasUpdateRegistry.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\ColorBlock.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Culling\ClipperRegistry.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Culling\Clipping.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Culling\IClipRegion.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Culling\RectangularVertexClipper.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\DefaultControls.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Dropdown.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\FontData.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\FontUpdateTracker.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Graphic.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\GraphicRaycaster.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\GraphicRebuildTracker.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\GraphicRegistry.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\IGraphicEnabledDisabled.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Image.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\IMask.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\IMaskable.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\InputField.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\AspectRatioFitter.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\CanvasScaler.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\ContentSizeFitter.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\GridLayoutGroup.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\HorizontalLayoutGroup.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\HorizontalOrVerticalLayoutGroup.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\ILayoutElement.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\LayoutElement.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\LayoutGroup.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\LayoutRebuilder.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\LayoutUtility.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\VerticalLayoutGroup.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Mask.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\MaskableGraphic.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\MaskUtilities.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\MaterialModifiers\IMaterialModifier.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Misc.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Navigation.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\RawImage.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\RectMask2D.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Scrollbar.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\ScrollRect.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Selectable.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\SetPropertyUtility.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Slider.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\SpecializedCollections\IndexedSet.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\SpriteState.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\StencilMaterial.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Text.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Toggle.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\ToggleGroup.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Utility\ListPool.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Utility\ObjectPool.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Utility\ReflectionMethodsCache.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Utility\VertexHelper.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\VertexModifiers\BaseMeshEffect.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\VertexModifiers\IMeshModifier.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\VertexModifiers\Outline.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\VertexModifiers\PositionAsUV1.cs" />
+    <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\VertexModifiers\Shadow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
