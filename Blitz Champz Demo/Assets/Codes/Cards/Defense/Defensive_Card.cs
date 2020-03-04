@@ -6,6 +6,8 @@ public class Defensive_Card : Card {
 	protected bool kick = false;
 	protected bool pass = false;
 	protected bool run = false;
+	//Get the AudioSource for each Defensive card
+	private AudioSource source;
 
 	void Start () {
 		
@@ -24,6 +26,9 @@ public class Defensive_Card : Card {
 	}
 	protected override void Play() {
 		owner.table.last_card.Remove();
+		//When the card is played, play the sound attached to it
+		source = GetComponent<AudioSource>();
+		source.Play();
 		AdvanceTurn();
 	}
 	private void OnMouseUpAsButton() {
