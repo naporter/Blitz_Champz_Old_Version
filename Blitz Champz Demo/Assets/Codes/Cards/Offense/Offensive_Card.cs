@@ -7,6 +7,8 @@ public class Offensive_Card : Card {
 	protected bool kick = false;
 	protected bool pass = false;
 	protected bool run = false;
+	//Get the AudioSource for each Offensive card
+	private AudioSource source;
 	void Start() {
 	}
 	public bool GetKick() {
@@ -21,6 +23,10 @@ public class Offensive_Card : Card {
 	protected override void Play() {
 		owner.field.Add(gameObject);
 		owner.hand.Remove(gameObject);
+		//When the card is played, play the sound attached to it
+		//Currently, this sound plays again when it is stolen with a Blitz card
+		source = GetComponent<AudioSource>();
+		source.Play();
 		owner.table.last_card = this;
 		for (int i = 0; i < owner.hand.Count; i++) {
 			owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
