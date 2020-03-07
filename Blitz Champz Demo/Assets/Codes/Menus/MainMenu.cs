@@ -30,4 +30,12 @@ public class MainMenu : MonoBehaviour
         loadPlayerOptions.SetActive(true);
     }
 
+    public void LoadTutorial()
+    {
+        Application.OpenURL("http://blitzchampz.com/rules/");
+    }
+
+
+    
+
 }
