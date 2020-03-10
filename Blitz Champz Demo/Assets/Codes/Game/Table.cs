@@ -43,14 +43,14 @@ public class Table : MonoBehaviour
             GameObject player1_object = Instantiate(player, new Vector3(-8f, -4.4f, 1f), transform.rotation);
             player1 = player1_object.GetComponent<Player>();
             player1.table = this;
-            GameObject player2_object = Instantiate(player, new Vector3(-8f, 4.4f, 1f), transform.rotation);
+            GameObject player2_object = Instantiate(player, new Vector3(-8f, 3.4f, 1f), transform.rotation);
             player2 = player2_object.GetComponent<Player>();
             player2.table = this;
             order.AddLast(player1);
             order.AddLast(player2);
         }
         if (player_count > 2) {
-            GameObject player3_object = Instantiate(player, new Vector3(8f, 4.4f, 1f), transform.rotation);
+            GameObject player3_object = Instantiate(player, new Vector3(8f, 3.4f, 1f), transform.rotation);
             player3 = player3_object.GetComponent<Player>();
             player3.table = this;
             order.AddLast(player3);
