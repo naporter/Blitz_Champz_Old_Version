@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class First_Down : Continuation_Card
 {
+    //Get the AudioSource for each Offensive card
+	private AudioSource source;
     // Start is called before the first frame update
     void Start()
     {
@@ -12,6 +14,9 @@ public class First_Down : Continuation_Card
     protected override void Play() {
         owner.Draw();
         owner.Draw();
+        //When the card is played, play the sound attached to it
+		source = GetComponent<AudioSource>();
+		source.Play();
         AdvanceTurn();
     }
 	public override void Show() {
