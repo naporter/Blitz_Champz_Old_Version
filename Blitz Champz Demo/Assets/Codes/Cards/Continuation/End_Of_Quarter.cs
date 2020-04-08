@@ -5,6 +5,8 @@ using UnityEngine;
 public class End_Of_Quarter : Continuation_Card
 {
     public string spriteName;
+    //Get the AudioSource for each Offensive card
+	private AudioSource source;
     // Start is called before the first frame update
     void Start()
     {
@@ -12,6 +14,9 @@ public class End_Of_Quarter : Continuation_Card
     }
     protected override void Play() {
         owner.table.Reverse();
+        //When the card is played, play the sound attached to it
+		source = GetComponent<AudioSource>();
+		source.Play();
         AdvanceTurn();
     }
 	public override void Show() {

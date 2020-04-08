@@ -44,6 +44,7 @@ public class Card : MonoBehaviour {
 	private void OnMouseUpAsButton() {
 		if (owner != null && owner.table.current_player == owner) {
 			this.Play();
+			//Look in to adding a check for cards to play sound here. Either during Play() or during the Discard() function
 			this.Discard();
 		}
 	}
