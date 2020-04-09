@@ -10,7 +10,8 @@ public class Card : MonoBehaviour {
 	public void SetOwner(Player own) {
 		this.owner = own;
 		if (owner.up) {
-			gameObject.transform.rotation = Quaternion.Euler(0,0,0f);
+			//180f = 0f
+			gameObject.transform.rotation = Quaternion.Euler(0,0,180f);
 		}
 	}
 	public virtual bool CheckValid() {
@@ -24,7 +25,8 @@ public class Card : MonoBehaviour {
 				owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
 			}
 			owner.table.last_card = null;
-			gameObject.GetComponent<Transform>().position = new Vector3(-1.45f, 0f, 0f);
+			//This moves card to discard pile, commented out to make animations work *OBSELETE*
+			//gameObject.GetComponent<Transform>().position = new Vector3(-1.45f, 0f, 0f);
 			gameObject.transform.rotation = Quaternion.Euler(0,0,0f);
 			owner.table.Discard(gameObject);
 			owner.Remove(gameObject);
