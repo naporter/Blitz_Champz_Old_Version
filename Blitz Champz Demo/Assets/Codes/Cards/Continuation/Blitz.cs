@@ -7,9 +7,14 @@ public class Blitz : Continuation_Card
     private bool played = false;
     //Get the AudioSource for each Offensive card
 	private AudioSource source;
+    //animation
+    public float speed = 2.5f;
+    private Vector3 target;
+    private Vector3 position;
     void Start()
     {
-        
+        target = new Vector3(-1.45f, 0f, 0f);
+        position = gameObject.transform.position;
     }
     public void SetPlayed(bool a) {
 		win_played = a;
@@ -101,6 +106,8 @@ public class Blitz : Continuation_Card
         }
         owner.OrderField();
         owner.table.SetReady(true);
+        //Animation not working, come back to this
+        //StartCoroutine(MoveTo());
         this.Discard();
     }
     private void OnMouseUpAsButton() {
@@ -158,5 +165,23 @@ public class Blitz : Continuation_Card
 	}
     void Update()
     {
+    }
+    //MoveTo Coroutine
+     IEnumerator MoveTo()
+    {
+       
+
+        // This looks unsafe, but Unity uses
+        // en epsilon when comparing vectors.
+        while (transform.position != target)
+        {
+            Debug.Log("Got to 4 loop");
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                target,
+                speed);
+            // Wait a frame and move again.
+            yield return null;
+        }
     }
 }

@@ -14,5 +14,4 @@ public class Continuation_Card : Card {
 		
 	}
 
-	
 }

@@ -32,6 +32,7 @@ public class Pass_Completion : Continuation_Card
     void Update() {
         
     }
+
     //MoveTo Coroutine
      IEnumerator MoveTo()
     {
