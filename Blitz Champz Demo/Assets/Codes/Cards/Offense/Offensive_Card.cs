@@ -10,7 +10,7 @@ public class Offensive_Card : Card {
 	//Get the AudioSource for each Offensive card
 	private AudioSource source;
 
-	//test work under here
+	//Animation parameters
 	public float speed = 1f;
     private Vector3 target;
     private Vector3 position;
@@ -45,7 +45,7 @@ public class Offensive_Card : Card {
 	}
 	public void Remove() { //remove card from the field and discard it thus removing points from that player
 		owner.UpdateScore();
-		//test work under here
+		//Animation for discard
 		target = new Vector3(-1.45f, 0f, 0f);
         position = gameObject.transform.position;
 		StartCoroutine(MoveTo());

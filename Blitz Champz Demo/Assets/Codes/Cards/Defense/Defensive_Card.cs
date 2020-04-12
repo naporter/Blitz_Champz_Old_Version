@@ -8,9 +8,12 @@ public class Defensive_Card : Card {
 	protected bool run = false;
 	//Get the AudioSource for each Defensive card
 	private AudioSource source;
+	//Animation parameters, set to public here so the lower classes can edit the values
+	public float speed = 1f;
+    public Vector3 target;
+    public Vector3 position;
 
 	void Start () {
-		
 	}
 	public void SetPlayed(bool a) {
 		win_played = a;
@@ -29,6 +32,7 @@ public class Defensive_Card : Card {
 		//When the card is played, play the sound attached to it
 		source = GetComponent<AudioSource>();
 		source.Play();
+		StartCoroutine(MoveTo());
 		AdvanceTurn();
 	}
 	private void OnMouseUpAsButton() {
@@ -68,4 +72,23 @@ public class Defensive_Card : Card {
 	void Update () {
 		
 	}
+
+	 //MoveTo Coroutine
+     IEnumerator MoveTo()
+    {
+       
+
+        // This looks unsafe, but Unity uses
+        // en epsilon when comparing vectors.
+        while (transform.position != target)
+        {
+            Debug.Log("Got to 4 loop");
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                target,
+                speed);
+            // Wait a frame and move again.
+            yield return null;
+        }
+    }
 }
