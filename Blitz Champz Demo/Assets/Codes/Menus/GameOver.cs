@@ -13,7 +13,7 @@ public class GameOver : MonoBehaviour
 
 	}
     public void Restart() {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("StartPage");
     }
 	void OnPointerEnter() {
 	}
