@@ -7,7 +7,7 @@ public class Pass_Completion : Continuation_Card
     //Get the AudioSource for each Offensive card
 	private AudioSource source;
     //animation
-    public float speed = 2.5f;
+    public float speed = .5f;
     private Vector3 target;
     private Vector3 position;
     void Start() {

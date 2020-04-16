@@ -8,7 +8,7 @@ public class End_Of_Quarter : Continuation_Card
     //Get the AudioSource for each Offensive card
 	private AudioSource source;
     //animation
-    public float speed = .25f;
+    public float speed = .5f;
     private Vector3 target;
     private Vector3 position;
     // Start is called before the first frame update

@@ -7,7 +7,7 @@ public class Fumble : Continuation_Card
     //Get the AudioSource for each Offensive card
 	private AudioSource source;
     //animation
-    public float speed = .25f;
+    public float speed = .5f;
     private Vector3 target;
     private Vector3 position;
     void Start()

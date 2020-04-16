@@ -11,7 +11,7 @@ public class Card : MonoBehaviour {
 		this.owner = own;
 		if (owner.up) {
 			//180f = 0f
-			gameObject.transform.rotation = Quaternion.Euler(0,0,180f);
+			gameObject.transform.rotation = Quaternion.Euler(0,0,0f);
 		}
 	}
 	public virtual bool CheckValid() {

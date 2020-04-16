@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - Blitz
     - Blocked_Kick
+    - ClickToLoadMenu
     - Conversion
     - Deck
     - End_Of_Quarter
@@ -11,24 +12,38 @@ ScriptsOnlyBuild:
     - First_Down
     - Five_Yard_Run
     - Fumble
+    - GameOver
     - Hail_Mary
+    - HoverBounce
     - Interception
+    - MainMenu
     - Pass_Completion
     - Passing_TD
     - Player
     - Rushing_TD
     - Table
     - Tackle
+    Unity.Rider.Editor.dll:
+    - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
     - TMPro.TMP_FontAsset
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
+    - TMPro.TextMeshProUGUI
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
+    - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.EventTrigger
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
@@ -36,7 +51,119 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Image
     - UnityEngine.UI.Text
   sceneClasses:
-    Assets/10-9-2019.unity:
+    Assets/BlitzChampzGame.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 65
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11180}
+    - Class: 114
+      Script: {instanceID: 11342}
+    - Class: 114
+      Script: {instanceID: 11382}
+    - Class: 114
+      Script: {instanceID: 11562}
+    - Class: 114
+      Script: {instanceID: 11786}
+    - Class: 114
+      Script: {instanceID: 12170}
+    - Class: 114
+      Script: {instanceID: 12254}
+    - Class: 114
+      Script: {instanceID: 12392}
+    - Class: 114
+      Script: {instanceID: 12590}
+    - Class: 114
+      Script: {instanceID: 12652}
+    - Class: 114
+      Script: {instanceID: 13010}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 124
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 212
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/MainMenu.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11180}
+    - Class: 114
+      Script: {instanceID: 11288}
+    - Class: 114
+      Script: {instanceID: 11382}
+    - Class: 114
+      Script: {instanceID: 11786}
+    - Class: 114
+      Script: {instanceID: 12170}
+    - Class: 114
+      Script: {instanceID: 12392}
+    - Class: 114
+      Script: {instanceID: 12590}
+    - Class: 114
+      Script: {instanceID: 12652}
+    - Class: 114
+      Script: {instanceID: 13010}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/StartPage.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -53,79 +180,93 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
-    - Class: 92
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 109
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9692}
+      Script: {instanceID: 11180}
     - Class: 114
-      Script: {instanceID: 9706}
+      Script: {instanceID: 11196}
     - Class: 114
-      Script: {instanceID: 9842}
+      Script: {instanceID: 11230}
     - Class: 114
-      Script: {instanceID: 9882}
+      Script: {instanceID: 11288}
     - Class: 114
-      Script: {instanceID: 9950}
+      Script: {instanceID: 11382}
     - Class: 114
-      Script: {instanceID: 9980}
+      Script: {instanceID: 11454}
     - Class: 114
-      Script: {instanceID: 10002}
+      Script: {instanceID: 11480}
     - Class: 114
-      Script: {instanceID: 10008}
+      Script: {instanceID: 11502}
     - Class: 114
-      Script: {instanceID: 10016}
+      Script: {instanceID: 11508}
     - Class: 114
-      Script: {instanceID: 10020}
+      Script: {instanceID: 11516}
     - Class: 114
-      Script: {instanceID: 10060}
+      Script: {instanceID: 11520}
     - Class: 114
-      Script: {instanceID: 10116}
+      Script: {instanceID: 11626}
     - Class: 114
-      Script: {instanceID: 10256}
+      Script: {instanceID: 11774}
     - Class: 114
-      Script: {instanceID: 10268}
+      Script: {instanceID: 11786}
     - Class: 114
-      Script: {instanceID: 10288}
+      Script: {instanceID: 11810}
     - Class: 114
-      Script: {instanceID: 10438}
+      Script: {instanceID: 11978}
     - Class: 114
-      Script: {instanceID: 10598}
+      Script: {instanceID: 12156}
     - Class: 114
-      Script: {instanceID: 10612}
+      Script: {instanceID: 12170}
     - Class: 114
-      Script: {instanceID: 10634}
+      Script: {instanceID: 12194}
     - Class: 114
-      Script: {instanceID: 10822}
+      Script: {instanceID: 12392}
     - Class: 114
-      Script: {instanceID: 10836}
+      Script: {instanceID: 12406}
     - Class: 114
-      Script: {instanceID: 10906}
+      Script: {instanceID: 12468}
     - Class: 114
-      Script: {instanceID: 11054}
+      Script: {instanceID: 12486}
     - Class: 114
-      Script: {instanceID: 11178}
+      Script: {instanceID: 12590}
     - Class: 114
-      Script: {instanceID: 11204}
+      Script: {instanceID: 12652}
     - Class: 114
-      Script: {instanceID: 11320}
+      Script: {instanceID: 12778}
     - Class: 114
-      Script: {instanceID: 11346}
+      Script: {instanceID: 12802}
     - Class: 114
-      Script: {instanceID: 11362}
+      Script: {instanceID: 12918}
     - Class: 114
-      Script: {instanceID: 11404}
+      Script: {instanceID: 12944}
+    - Class: 114
+      Script: {instanceID: 12960}
+    - Class: 114
+      Script: {instanceID: 12972}
+    - Class: 114
+      Script: {instanceID: 13010}
     - Class: 115
-      Script: {instanceID: 0}
-    - Class: 124
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
     - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
       Script: {instanceID: 0}
     - Class: 212
       Script: {instanceID: 0}
@@ -146,7 +287,7 @@ ScriptsOnlyBuild:
     className: CanvasScaler
   - hash:
       serializedVersion: 2
-      Hash: 66186e6188875320029f4acd00f999b6
+      Hash: f88f34589a7a93b245196e7c5905ac2c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
@@ -170,10 +311,22 @@ ScriptsOnlyBuild:
     className: TMP_Dropdown
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: HoverBounce
+  - hash:
+      serializedVersion: 2
       Hash: e7a73f5f78ba6445195ec23b74a1ce2d
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_ScrollbarEventHandler
+  - hash:
+      serializedVersion: 2
+      Hash: 990bc5798ff24f355a7e1f39f58bc434
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MainMenu
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -236,13 +389,13 @@ ScriptsOnlyBuild:
     className: GridLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 751aea79441c33139a376afbcbc36995
+      Hash: bcdb0e2644ca057da57879e47629562f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Interception
   - hash:
       serializedVersion: 2
-      Hash: 8a4405d034e7e4137b02d67ddea03e20
+      Hash: ed5b2035a6c7aada725b9a270fd4b8e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Rushing_TD
@@ -266,7 +419,7 @@ ScriptsOnlyBuild:
     className: LayoutElement
   - hash:
       serializedVersion: 2
-      Hash: 751aea79441c33139a376afbcbc36995
+      Hash: ed5b2035a6c7aada725b9a270fd4b8e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Blitz
@@ -278,25 +431,25 @@ ScriptsOnlyBuild:
     className: PhysicsRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 751aea79441c33139a376afbcbc36995
+      Hash: ed5b2035a6c7aada725b9a270fd4b8e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Fumble
   - hash:
       serializedVersion: 2
-      Hash: 751aea79441c33139a376afbcbc36995
+      Hash: bcdb0e2644ca057da57879e47629562f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Tackle
   - hash:
       serializedVersion: 2
-      Hash: 8a4405d034e7e4137b02d67ddea03e20
+      Hash: ed5b2035a6c7aada725b9a270fd4b8e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Field_Goal
   - hash:
       serializedVersion: 2
-      Hash: 3d3b3b901f357cdc0f318f25864ee6a1
+      Hash: 3a3f9b6d3063756a8855f466958685c6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Table
@@ -326,7 +479,7 @@ ScriptsOnlyBuild:
     className: TMP_SubMeshUI
   - hash:
       serializedVersion: 2
-      Hash: 8a4405d034e7e4137b02d67ddea03e20
+      Hash: ed5b2035a6c7aada725b9a270fd4b8e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Conversion
@@ -350,7 +503,7 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: 751aea79441c33139a376afbcbc36995
+      Hash: ed5b2035a6c7aada725b9a270fd4b8e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Pass_Completion
@@ -386,7 +539,7 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: 751aea79441c33139a376afbcbc36995
+      Hash: bcdb0e2644ca057da57879e47629562f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Defensive_Card
@@ -410,7 +563,7 @@ ScriptsOnlyBuild:
     className: ScrollRect
   - hash:
       serializedVersion: 2
-      Hash: 751aea79441c33139a376afbcbc36995
+      Hash: ed5b2035a6c7aada725b9a270fd4b8e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: First_Down
@@ -422,7 +575,7 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
-      Hash: 8a4405d034e7e4137b02d67ddea03e20
+      Hash: ed5b2035a6c7aada725b9a270fd4b8e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Offensive_Card
@@ -446,7 +599,7 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
-      Hash: 8a4405d034e7e4137b02d67ddea03e20
+      Hash: ed5b2035a6c7aada725b9a270fd4b8e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Hail_Mary
@@ -468,6 +621,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Deck
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameOver
   - hash:
       serializedVersion: 2
       Hash: 5ad4aa237d47ac2bab17bacb672edf7a
@@ -518,13 +677,19 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ClickToLoadMenu
+  - hash:
+      serializedVersion: 2
       Hash: c1933cc0a2f4ff6eb13333347497beb3
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: 751aea79441c33139a376afbcbc36995
+      Hash: bcdb0e2644ca057da57879e47629562f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Blocked_Kick
@@ -560,7 +725,7 @@ ScriptsOnlyBuild:
     className: Continuation_Card
   - hash:
       serializedVersion: 2
-      Hash: 8a4405d034e7e4137b02d67ddea03e20
+      Hash: ed5b2035a6c7aada725b9a270fd4b8e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Extra_Point
@@ -590,7 +755,7 @@ ScriptsOnlyBuild:
     className: TMP_ColorGradient
   - hash:
       serializedVersion: 2
-      Hash: 0e14094b3f9cf415895be9406e38ebe5
+      Hash: 2483a67e9355c934aa0c7c9483d1b048
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: End_Of_Quarter
@@ -608,7 +773,7 @@ ScriptsOnlyBuild:
     className: BaseInput
   - hash:
       serializedVersion: 2
-      Hash: 751aea79441c33139a376afbcbc36995
+      Hash: ed5b2035a6c7aada725b9a270fd4b8e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Five_Yard_Run
@@ -620,7 +785,7 @@ ScriptsOnlyBuild:
     className: Outline
   - hash:
       serializedVersion: 2
-      Hash: 8a4405d034e7e4137b02d67ddea03e20
+      Hash: ed5b2035a6c7aada725b9a270fd4b8e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Passing_TD
@@ -638,7 +803,13 @@ ScriptsOnlyBuild:
     className: TMP_SubMesh
   - hash:
       serializedVersion: 2
-      Hash: 20eeaeae829475b5e354d1f626c51a2b
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: UnityEngine.TestRunner.dll
+    namespaceName: UnityEngine.TestRunner.Utils
+    className: TestRunCallbackListener
+  - hash:
+      serializedVersion: 2
+      Hash: 4ef0f7d42cdb13479386e1f049c315aa
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner
     className: PlaymodeTestsController
@@ -686,5 +857,7 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 19
   scenePathNames:
-  - Assets/10-9-2019.unity
-  playerPath: C:/Users/caleb/Downloads/Blitz Champz Demo.exe
+  - Assets/StartPage.unity
+  - Assets/MainMenu.unity
+  - Assets/BlitzChampzGame.unity
+  playerPath: C:/Users/Normal Use/Desktop/BlitzBuild/v0.3/Blitz Champz Demo.exe

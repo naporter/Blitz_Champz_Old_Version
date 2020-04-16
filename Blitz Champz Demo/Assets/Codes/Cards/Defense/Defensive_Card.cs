@@ -9,7 +9,7 @@ public class Defensive_Card : Card {
 	//Get the AudioSource for each Defensive card
 	private AudioSource source;
 	//Animation parameters, set to public here so the lower classes can edit the values
-	public float speed = .25f;
+	public float speed = .5f;
     public Vector3 target;
     public Vector3 position;
 
