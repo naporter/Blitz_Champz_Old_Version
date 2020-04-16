@@ -106,8 +106,6 @@ public class Blitz : Continuation_Card
         }
         owner.OrderField();
         owner.table.SetReady(true);
-        //Animation not working, come back to this
-        //StartCoroutine(MoveTo());
         this.Discard();
     }
     private void OnMouseUpAsButton() {
@@ -154,8 +152,11 @@ public class Blitz : Continuation_Card
 			for (int i = 0; i < owner.hand.Count; i++) {
 				owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
 			}
-			gameObject.GetComponent<Transform>().position = new Vector3(-1.45f, 0f, 0f);
+            //Old transformation call, commented out to make animation work correctly
+			//gameObject.GetComponent<Transform>().position = new Vector3(-1.45f, 0f, 0f);
 			gameObject.transform.rotation = Quaternion.Euler(0,0,0f);
+            //Animation
+            StartCoroutine(MoveTo());
 			owner.table.Discard(gameObject);
 			owner.Remove(gameObject);
 			this.owner = null;

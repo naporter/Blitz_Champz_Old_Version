@@ -26,6 +26,7 @@ public class Offensive_Card : Card {
 		return run;
 	}
 	protected override void Play() {
+		//possible transformation here
 		owner.field.Add(gameObject);
 		owner.hand.Remove(gameObject);
 		//When the card is played, play the sound attached to it
