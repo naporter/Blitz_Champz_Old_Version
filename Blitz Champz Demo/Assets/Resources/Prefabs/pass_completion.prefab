@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  speed: 0.5
 --- !u!65 &2270665736547668942
 BoxCollider:
   m_ObjectHideFlags: 0

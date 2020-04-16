@@ -11,6 +11,10 @@ public class Player : MonoBehaviour {
 	public bool right = false;
 	public bool up = false;
 	public bool valid = true;
+	//animation
+    public float speed = 1f;
+    private Vector3 target;
+    private Vector3 position;
 	void Start () {
 		score = 0;
 		if (this.transform.position.x > 0) {
@@ -61,11 +65,13 @@ public class Player : MonoBehaviour {
 			if (right) {
 				field[i].GetComponent<SpriteRenderer>().sortingOrder = i;
 				Vector3 adjustment = new Vector3(-1.75f + -1 * 0.25f * i, 0, 2 * (field.Count - i));
+				//This determines the card's final position on the board
 				field[i].transform.position = transform.position + adjustment + Vector3.Scale(transform.up, new Vector3(0, 2.5f, 0));
 				field[i].transform.rotation = Quaternion.Euler(0,0,-90f);
 			} else {
 				field[i].GetComponent<SpriteRenderer>().sortingOrder = i;
 				Vector3 adjustment = new Vector3(1.75f + 0.25f * i, 0, 2 * (field.Count - i));
+				//This determines the card's final position on the board
 				field[i].transform.position = transform.position + adjustment + Vector3.Scale(transform.up, new Vector3(0, 2.5f, 0));
 				field[i].transform.rotation = Quaternion.Euler(0,0,90f);
 			}
@@ -135,4 +141,23 @@ public class Player : MonoBehaviour {
 	}
 	void Update () {
 	}
+
+	 //MoveTo Coroutine
+     IEnumerator MoveTo()
+    {
+       
+
+        // This looks unsafe, but Unity uses
+        // en epsilon when comparing vectors.
+        while (transform.position != target)
+        {
+            Debug.Log("Got to 4 loop");
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                target,
+                speed);
+            // Wait a frame and move again.
+            yield return null;
+        }
+    }
 }

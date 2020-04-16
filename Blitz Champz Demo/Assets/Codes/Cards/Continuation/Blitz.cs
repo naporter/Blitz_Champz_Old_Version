@@ -7,9 +7,14 @@ public class Blitz : Continuation_Card
     private bool played = false;
     //Get the AudioSource for each Offensive card
 	private AudioSource source;
+    //animation
+    public float speed = 2.5f;
+    private Vector3 target;
+    private Vector3 position;
     void Start()
     {
-        
+        target = new Vector3(-1.45f, 0f, 0f);
+        position = gameObject.transform.position;
     }
     public void SetPlayed(bool a) {
 		win_played = a;
@@ -147,8 +152,11 @@ public class Blitz : Continuation_Card
 			for (int i = 0; i < owner.hand.Count; i++) {
 				owner.hand[i].GetComponent<SpriteRenderer>().color = Color.white;
 			}
-			gameObject.GetComponent<Transform>().position = new Vector3(-1.45f, 0f, 0f);
+            //Old transformation call, commented out to make animation work correctly
+			//gameObject.GetComponent<Transform>().position = new Vector3(-1.45f, 0f, 0f);
 			gameObject.transform.rotation = Quaternion.Euler(0,0,0f);
+            //Animation
+            StartCoroutine(MoveTo());
 			owner.table.Discard(gameObject);
 			owner.Remove(gameObject);
 			this.owner = null;
@@ -158,5 +166,23 @@ public class Blitz : Continuation_Card
 	}
     void Update()
     {
+    }
+    //MoveTo Coroutine
+     IEnumerator MoveTo()
+    {
+       
+
+        // This looks unsafe, but Unity uses
+        // en epsilon when comparing vectors.
+        while (transform.position != target)
+        {
+            Debug.Log("Got to 4 loop");
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                target,
+                speed);
+            // Wait a frame and move again.
+            yield return null;
+        }
     }
 }

@@ -9,6 +9,11 @@ public class Offensive_Card : Card {
 	protected bool run = false;
 	//Get the AudioSource for each Offensive card
 	private AudioSource source;
+
+	//Animation parameters
+	public float speed = 1f;
+    private Vector3 target;
+    private Vector3 position;
 	void Start() {
 	}
 	public bool GetKick() {
@@ -21,6 +26,7 @@ public class Offensive_Card : Card {
 		return run;
 	}
 	protected override void Play() {
+		//possible transformation here
 		owner.field.Add(gameObject);
 		owner.hand.Remove(gameObject);
 		//When the card is played, play the sound attached to it
@@ -40,6 +46,10 @@ public class Offensive_Card : Card {
 	}
 	public void Remove() { //remove card from the field and discard it thus removing points from that player
 		owner.UpdateScore();
+		//Animation for discard
+		target = new Vector3(-1.45f, 0f, 0f);
+        position = gameObject.transform.position;
+		StartCoroutine(MoveTo());
 		Discard();
 	}
 	private void OnMouseUpAsButton() {
@@ -49,4 +59,22 @@ public class Offensive_Card : Card {
 	}
 	void Update () {
 	}
+
+	 IEnumerator MoveTo()
+    {
+       
+
+        // This looks unsafe, but Unity uses
+        // en epsilon when comparing vectors.
+        while (transform.position != target)
+        {
+            Debug.Log("Got to 4 loop");
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                target,
+                speed);
+            // Wait a frame and move again.
+            yield return null;
+        }
+    }
 }
