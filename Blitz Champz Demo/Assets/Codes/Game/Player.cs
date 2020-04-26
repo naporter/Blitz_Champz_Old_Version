@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Photon;
+using Photon.Pun;
 
 public class Player : MonoBehaviour {
 	public int score;
@@ -36,14 +38,36 @@ public class Player : MonoBehaviour {
 		}
 		return score;
 	}
+	[PunRPC]
+	//new method added below
+	void AddCard(int ID) {
+		GameObject new_card = PhotonView.Find(ID).gameObject;
+		new_card.GetComponent<Card>().SetOwner(this);
+		hand.Add(new_card);
+		GetComponent<PhotonView>().RPC("OrderCards", RpcTarget.All);
+	}
 	public void Draw() {
-		Deck draw_deck = table.draw_deck;
-		if (draw_deck.draw_deck.Count > 0 && table.current_player == this) {
-			GameObject new_card = draw_deck.Draw(this);
-			new_card.GetComponent<Card>().SetOwner(this);
-			hand.Add(new_card);
+		//moved Deck draw_deck = table.draw_deck;
+		//old if (draw_deck.draw_deck.Count > 0 && table.current_player == this) {
+		if (PhotonNetwork.IsMasterClient && this == table.current_player){
+			Debug.Log("Drawing from master client" + PhotonNetwork.LocalPlayer.UserId);
+			Deck draw_deck = table.draw_deck;
+			GameObject new_card = draw_deck.Draw();
+			int ID = new_card.GetComponent<PhotonView>().ViewID;
+			GetComponent<PhotonView>().RPC("AddCard", RpcTarget.All, ID);
 		}
+		//possible error here, remove if so
 		OrderCards();
+	}
+	//next 2 methods are added
+	public void ReclaimOthers() {
+		GetComponent<PhotonView>().RPC("Reclaim", RpcTarget.Others);
+	}
+	[PunRPC]
+	void Reclaim() {
+		foreach (GameObject a in field) {
+			a.GetComponent<PhotonView>().RequestOwnership();
+		}
 	}
 
 	public void Remove(GameObject card) {
@@ -77,29 +101,54 @@ public class Player : MonoBehaviour {
 			}
 		}
 	}
+	[PunRPC]
 	public void OrderCards() {
-		if (CheckValid() == false) {
-			Debug.Log("No valid cards. Discard please.");
-		}
-		if (right) {
-			for (int i = 0; i < hand.Count; i++) {
-				Vector3 adjustment = new Vector3(-1 * 0.5f * i, 0.0f, 0.0f);
-				hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * i;
-				hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * (hand.Count - i));
-				hand[i].GetComponent<BoxCollider>().enabled = true;
-				if (this == table.current_player) {
-					hand[i].GetComponent<Card>().Show();
+		if(table.current_player == this) {
+			if (CheckValid() == false) {
+				Debug.Log("No valid cards. Discard please.");
+			}
+			if (right) {
+				for (int i = 0; i < hand.Count; i++) {
+					Vector3 adjustment = new Vector3(-1 * 0.5f * i, 0.0f, 0.0f);
+					hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * i;
+					hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * (hand.Count - i));
+					//if an error occurs here, add this method in
+					/*
+					if (up) {
+						hand[i].transform.rotation = Quaternion.Euler(0,0,180f);
+					}
+					*/
+					hand[i].GetComponent<BoxCollider>().enabled = true;
+					//old if (this == table.current_player) {
+					if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && this == table.current_player) {
+						hand[i].GetComponent<Card>().Show();
+					}
+					//added below to hide hand from other players
+					else {
+						hand[i].GetComponent<Card>().Hide();
+					}
 				}
 			}
-		}
-		else {
-			for (int i = 0; i < hand.Count; i++) {
-				Vector3 adjustment = new Vector3(0.5f * i, 0.0f, 0.0f);
-				hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * (hand.Count - i);
-				hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * i);
-				hand[i].GetComponent<BoxCollider>().enabled = true;
-				if (this == table.current_player) {
-					hand[i].GetComponent<Card>().Show();
+			else {
+				for (int i = 0; i < hand.Count; i++) {
+					Vector3 adjustment = new Vector3(0.5f * i, 0.0f, 0.0f);
+					hand[i].GetComponent<SpriteRenderer>().sortingOrder = 2 * (hand.Count - i);
+					hand[i].GetComponent<Transform>().position = gameObject.transform.position + adjustment + new Vector3(0f, 0f, 2 * i);
+					//if an error occurs here, add this method in
+					/*
+					if (up) {
+						hand[i].transform.rotation = Quaternion.Euler(0,0,180f);
+					}
+					*/
+					hand[i].GetComponent<BoxCollider>().enabled = true;
+					//old if (this == table.current_player) {
+					if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && this == table.current_player) {
+						hand[i].GetComponent<Card>().Show();
+					}
+					//added below to hide hand from other players
+					else {
+						hand[i].GetComponent<Card>().Hide();
+					}
 				}
 			}
 		}

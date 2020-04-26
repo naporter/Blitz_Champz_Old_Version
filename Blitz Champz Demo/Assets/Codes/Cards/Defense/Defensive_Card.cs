@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Defensive_Card : Card {
 	protected bool kick = false;
@@ -27,6 +28,7 @@ public class Defensive_Card : Card {
 	public bool GetRun() {
 		return run;
 	}
+	[PunRPC]
 	protected override void Play() {
 		owner.table.last_card.Remove();
 		//When the card is played, play the sound attached to it
@@ -36,16 +38,20 @@ public class Defensive_Card : Card {
 		AdvanceTurn();
 	}
 	private void OnMouseUpAsButton() {
-		if (owner != null && owner.table.current_player == owner) {
-            if (CheckValid()) {
-				this.Play();
-                this.Discard();
+		//old if (owner != null && owner.table.current_player == owner) {
+        if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner.table.current_player == owner) {
+			if (CheckValid()) {
+				//old this.Play();
+                //old this.Discard();
+				this.GetComponent<PhotonView>().RPC("Play", RpcTarget.All);
+				this.GetComponent<PhotonView>().RPC("Discard", RpcTarget.All);
             } else {
 				if (owner.GetValid()) {
                 	Debug.Log("Not a valid move");
 				} else {
 					AdvanceTurn();
-					this.Discard();
+					//old this.Discard();
+					this.GetComponent<PhotonView>().RPC("Discard", RpcTarget.All);
 				}
             }
 		}

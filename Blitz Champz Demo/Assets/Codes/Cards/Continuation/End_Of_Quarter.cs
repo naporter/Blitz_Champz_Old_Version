@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class End_Of_Quarter : Continuation_Card
 {
@@ -17,6 +18,7 @@ public class End_Of_Quarter : Continuation_Card
         target = new Vector3(-1.45f, 0f, 0f);
         position = gameObject.transform.position;
     }
+    [PunRPC]
     protected override void Play() {
         StartCoroutine(MoveTo());
         owner.table.Reverse();

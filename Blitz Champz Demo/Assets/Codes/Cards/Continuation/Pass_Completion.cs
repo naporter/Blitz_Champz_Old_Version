@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Pass_Completion : Continuation_Card
 {
@@ -16,6 +17,7 @@ public class Pass_Completion : Continuation_Card
         position = gameObject.transform.position;
         
     }
+    [PunRPC]
     protected override void Play() {
         
         StartCoroutine(MoveTo());

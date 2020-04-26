@@ -4,7 +4,8 @@ using UnityEngine;
 
 public static class Manager
 {
-    private static int player_count;
+    //overridden for testing purposes *private static int player_count;
+    private static int player_count = 2;
     public static int PlayerCount {
         get {
             return player_count;

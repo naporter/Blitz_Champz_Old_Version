@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 
 public class Card : MonoBehaviour {
@@ -9,6 +11,7 @@ public class Card : MonoBehaviour {
 	protected bool win_played = false;
 	public void SetOwner(Player own) {
 		this.owner = own;
+		this.GetComponent<PhotonView>().TransferOwnership(own.GetComponent<PhotonView>().Owner);
 		if (owner.up) {
 			//180f = 0f
 			gameObject.transform.rotation = Quaternion.Euler(0,0,0f);
@@ -19,6 +22,7 @@ public class Card : MonoBehaviour {
 	}
 	void Start () {
 	}
+	[PunRPC]
 	public void Discard () {
 		if (this.owner != null) {
 			for (int i = 0; i < owner.hand.Count; i++) {
@@ -44,15 +48,20 @@ public class Card : MonoBehaviour {
 		owner.table.AdvanceTurn();
 	}
 	private void OnMouseUpAsButton() {
-		if (owner != null && owner.table.current_player == owner) {
-			this.Play();
-			//Look in to adding a check for cards to play sound here. Either during Play() or during the Discard() function
-			this.Discard();
+		//old if (owner != null && owner.table.current_player == owner) {
+		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner.table.current_player == owner) {
+			//old this.Play();
+			//old this.Discard();
+			this.GetComponent<PhotonView>().RPC("Play", RpcTarget.All);
+			this.GetComponent<PhotonView>().RPC("Discard", RpcTarget.All);
 		}
 	}
 	void OnMouseEnter() {
-		if (owner != null && owner == owner.table.current_player) {
+		//old if (owner != null && owner == owner.table.current_player) {
+		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner == owner.table.current_player) {
 			if (owner.hand.Contains(gameObject)) {
+				//possible error here, if so add this function to replace the one below
+				//gameObject.transform.position = new Vector3(gameObject.transform.position.x, owner.transform.position.y, gameObject.transform.position.z) +  Vector3.Scale(owner.transform.up, new Vector3(0f, 0.5f, 0f));
 				gameObject.transform.position += Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
 				gameObject.GetComponent<SpriteRenderer>().sortingOrder +=20;
 				for (int i = 0; i < owner.hand.Count; i++) {
@@ -88,8 +97,11 @@ public class Card : MonoBehaviour {
 		}
 	}
 	void OnMouseExit() {
-		if (owner != null && owner == owner.table.current_player) {
+		//old if (owner != null && owner == owner.table.current_player) {
+		if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null) {
 			if (owner.hand.Contains(gameObject)) {
+				//possible error here, if so replace lower with this
+				//gameObject.transform.position = new Vector3(gameObject.transform.position.x, owner.transform.position.y, gameObject.transform.position.z);
 				gameObject.transform.position -= Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
 				gameObject.GetComponent<SpriteRenderer>().sortingOrder -=20;
 				if (!win_played){
@@ -120,6 +132,7 @@ public class Card : MonoBehaviour {
 			}
 		}
 	}
+	[PunRPC]
 	protected virtual void Play () {
 	}
 	void Update () {

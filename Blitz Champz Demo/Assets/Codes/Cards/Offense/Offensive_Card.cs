@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Offensive_Card : Card {
 	protected int value;
@@ -25,6 +26,7 @@ public class Offensive_Card : Card {
 	public bool GetRun() {
 		return run;
 	}
+	[PunRPC]
 	protected override void Play() {
 		//possible transformation here
 		owner.field.Add(gameObject);
@@ -50,11 +52,14 @@ public class Offensive_Card : Card {
 		target = new Vector3(-1.45f, 0f, 0f);
         position = gameObject.transform.position;
 		StartCoroutine(MoveTo());
-		Discard();
+		//old Discard();
+		this.GetComponent<PhotonView>().RPC("Discard", RpcTarget.All);
 	}
 	private void OnMouseUpAsButton() {
-		if (owner != null && owner.table.current_player == owner) {
-			this.Play();
+		//old if (owner != null && owner.table.current_player == owner) {
+		if ((gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner.table.current_player == owner) || (owner == owner.table.current_player && !owner.table.ready && owner.gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer)) { //| (owner == owner.table.current_player) second case is for when blitz is played
+			//old this.Play();
+			this.GetComponent<PhotonView>().RPC("Play", RpcTarget.All);
 		}
 	}
 	void Update () {
