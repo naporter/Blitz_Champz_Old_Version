@@ -5,7 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 
 
-public class Card : MonoBehaviour {
+public class Card : MonoBehaviourPunCallbacks {
 	public Player owner;
 	protected bool valid = true;
 	protected bool win_played = false;

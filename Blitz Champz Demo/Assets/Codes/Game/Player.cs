@@ -5,7 +5,7 @@ using TMPro;
 using Photon;
 using Photon.Pun;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviourPunCallbacks {
 	public int score;
 	public List<GameObject> hand;
 	public List<GameObject> field;
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour {
 		GameObject new_card = PhotonView.Find(ID).gameObject;
 		new_card.GetComponent<Card>().SetOwner(this);
 		hand.Add(new_card);
-		GetComponent<PhotonView>().RPC("OrderCards", RpcTarget.All);
+		photonView.RPC("OrderCards", RpcTarget.All);
 	}
 	public void Draw() {
 		//moved Deck draw_deck = table.draw_deck;
@@ -54,14 +54,14 @@ public class Player : MonoBehaviour {
 			Deck draw_deck = table.draw_deck;
 			GameObject new_card = draw_deck.Draw();
 			int ID = new_card.GetComponent<PhotonView>().ViewID;
-			GetComponent<PhotonView>().RPC("AddCard", RpcTarget.All, ID);
+			photonView.RPC("AddCard", RpcTarget.All, ID);
 		}
 		//possible error here, remove if so
 		OrderCards();
 	}
 	//next 2 methods are added
 	public void ReclaimOthers() {
-		GetComponent<PhotonView>().RPC("Reclaim", RpcTarget.Others);
+		photonView.RPC("Reclaim", RpcTarget.Others);
 	}
 	[PunRPC]
 	void Reclaim() {
@@ -188,6 +188,7 @@ public class Player : MonoBehaviour {
 	public bool GetValid() {
 		return valid;
 	}
+	
 	void Update () {
 	}
 

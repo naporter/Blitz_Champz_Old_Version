@@ -75,6 +75,7 @@
      <Compile Include="Assets\Codes\Cards\Offense\Passing_TD.cs" />
      <Compile Include="Assets\Codes\Cards\Offense\Rushing_TD.cs" />
      <Compile Include="Assets\Codes\Game\Deck.cs" />
+     <Compile Include="Assets\Codes\Game\Launcher.cs" />
      <Compile Include="Assets\Codes\Game\Manager.cs" />
      <Compile Include="Assets\Codes\Game\Player.cs" />
      <Compile Include="Assets\Codes\Game\Table.cs" />

@@ -76,7 +76,7 @@ public class Blitz : Continuation_Card
         played = true; //this is used to disable the OnMouseExit() method so that it doesn't lighten the cards
         gameObject.GetComponent<BoxCollider>().enabled = false;
         //old method Show();
-        GetComponent<PhotonView>().RPC("Show", RpcTarget.All);
+        photonView.RPC("Show", RpcTarget.All);
         gameObject.transform.position += Vector3.Scale(transform.up, new Vector3(0f, 0.5f, 0f));
         gameObject.GetComponent<SpriteRenderer>().sortingOrder +=20;
         for (int i = 0; i < owner.hand.Count; i++) {
@@ -120,7 +120,7 @@ public class Blitz : Continuation_Card
         if (gameObject.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer && owner != null && owner.table.current_player == owner) {
 			if (canPlay) {
                 //old StartCoroutine(SelectCard());
-                GetComponent<PhotonView>().RPC("Play", RpcTarget.All);
+                photonView.RPC("Play", RpcTarget.All);
             }
             else {
                 if (owner.GetValid()) {
@@ -172,7 +172,7 @@ public class Blitz : Continuation_Card
 			this.owner = null;
 			Destroy(GetComponent<BoxCollider>());
 			//old Show();
-            GetComponent<PhotonView>().RPC("Show", RpcTarget.All);
+            photonView.RPC("Show", RpcTarget.All);
 		}
 	}
     void Update()

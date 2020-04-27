@@ -9,7 +9,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.Demo.PunBasics;
 
-public class Table : MonoBehaviourPunCallbacks
+public class Table : MonoBehaviourPun
 {
     
     public Deck draw_deck;
