@@ -59,15 +59,15 @@ public class Launcher : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
-    public void SetPlayerName(string name)
+    public void SetPlayerName()
     {
-        playerName = name;
+        playerName = playerNameField.text;
         Debug.Log("Changed player name" + name);
     }
 
-    public void SetRoomName(string name)
+    public void SetRoomName()
     {
-        roomName = name;
+		roomName = roomNameField.text;
         Debug.Log("Changed room name" + name);
     }
     
@@ -117,7 +117,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         // 1
         base.OnConnected();
         // 2
-        connectionStatus.text = "Connected to Photon!";
+        connectionStatus.text = "Connected!";
         connectionStatus.color = Color.green;
         roomJoinUI.SetActive(true);
         buttonLoadArena.SetActive(false);
