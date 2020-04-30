@@ -1265,7 +1265,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.17125683}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.9482422, y: 2.550003}
+  m_AnchoredPosition: {x: -2.948246, y: 2.550003}
   m_SizeDelta: {x: -56.1035, y: -8.9}
   m_Pivot: {x: 0.50000006, y: 0.49999982}
 --- !u!114 &459238752
@@ -1728,8 +1728,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.43774828, y: 0.16389441}
   m_AnchorMax: {x: 0.60925174, y: 0.2753665}
-  m_AnchoredPosition: {x: -25.358002, y: 3.5500183}
-  m_SizeDelta: {x: -24.5, y: 7.1}
+  m_AnchoredPosition: {x: -20.941002, y: 3.550003}
+  m_SizeDelta: {x: 12.509998, y: 35.699997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &579524166
 MonoBehaviour:
@@ -2189,7 +2189,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 5
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -2218,7 +2218,7 @@ MonoBehaviour:
     spaceCount: 2
     wordCount: 2
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -2530,7 +2530,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -25, y: 30}
+  m_AnchoredPosition: {x: -0.0025024, y: 34}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &999045294
@@ -3285,7 +3285,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 6
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -3314,7 +3314,7 @@ MonoBehaviour:
     spaceCount: 1
     wordCount: 2
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -3547,7 +3547,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5987594, y: 0.568}
   m_AnchorMax: {x: 0.94924486, y: 0.6945046}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 14.932007}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1367654169
@@ -4290,8 +4290,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.43774828, y: 0.16389441}
   m_AnchorMax: {x: 0.60925174, y: 0.2753665}
-  m_AnchoredPosition: {x: -25.059998, y: 3.5500183}
-  m_SizeDelta: {x: -25.1, y: 7.1}
+  m_AnchoredPosition: {x: -20.941002, y: 3.550003}
+  m_SizeDelta: {x: 12.509998, y: 35.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1665439145
 MonoBehaviour:
