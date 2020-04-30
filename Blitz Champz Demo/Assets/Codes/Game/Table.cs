@@ -53,14 +53,14 @@ public class Table : MonoBehaviourPun
                         Debug.Log(b);
                         Debug.Log("C");
                         if (b == 0) {
-                            GameObject player2_object = PhotonNetwork.Instantiate("player", new Vector3(-8f, 4.4f, 1f), Quaternion.Euler(0,0,180f));
+                            GameObject player2_object = PhotonNetwork.Instantiate("player", new Vector3(-8f, 3.4f, 1f), Quaternion.Euler(0,0,180f));
                             player2 = player2_object.GetComponent<Player>();
                             order.AddLast(player2);
                             player2.table = this;
                             player2_object.GetComponent<PhotonView>().TransferOwnership(temp_current.Value);
                             temp_current = temp_current.Next ?? temp_current.List.First;
                         } else if (b == 1) {
-                            GameObject player3_object = PhotonNetwork.Instantiate("player", new Vector3(8f, 4.4f, 1f), Quaternion.Euler(0,0,180f));
+                            GameObject player3_object = PhotonNetwork.Instantiate("player", new Vector3(8f, 3.4f, 1f), Quaternion.Euler(0,0,180f));
                             player3 = player3_object.GetComponent<Player>();
                             order.AddLast(player3);
                             player3.table = this;

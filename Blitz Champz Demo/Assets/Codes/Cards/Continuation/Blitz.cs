@@ -34,13 +34,11 @@ public class Blitz : Continuation_Card
     }
     [PunRPC]
     protected override void Play() {
-        //When the card is played, play the sound attached to it
-		//Currently, Blitz causes the stolen card to play its sound again
-		source = GetComponent<AudioSource>();
-		source.Play();
         StartCoroutine(SelectCard());
     }
     IEnumerator SelectCard() {
+		source = GetComponent<AudioSource>();
+		source.Play();
         bool losing = false;
         Player winner = null;
         owner.table.SetReady(false);
