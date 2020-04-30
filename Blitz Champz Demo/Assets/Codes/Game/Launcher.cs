@@ -107,7 +107,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
         else
         {
-            playerStatus.text = "Minimum 2 Players required to Load Arena!";
+            playerStatus.text = "Minimum 2 Players \nrequired to Load Arena!";
         }
     }
 
@@ -138,6 +138,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             buttonLoadArena.SetActive(true);
             buttonJoinRoom.SetActive(false);
+            playerStatus.color = Color.blue;
             playerStatus.text = "You are Lobby Leader";
         }
         else
