@@ -31,13 +31,11 @@ ScriptsOnlyBuild:
     - Photon.Pun.Demo.PunBasics.CameraWork
     - Photon.Pun.Demo.PunBasics.PlayerAnimatorManager
     - Photon.Pun.Demo.PunBasics.PlayerManager
-    - Photon.Pun.Demo.PunBasics.PlayerNameInputField
     - Photon.Pun.Demo.PunBasics.PlayerUI
     - Photon.Pun.Demo.SlotRacer.PlayerControl
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
     PhotonUnityNetworking.Editor.dll:
-    - Photon.Pun.PhotonTransformViewEditor
-    - Photon.Pun.PhotonViewInspector
+    - Photon.Pun.PunSceneSettings
     PhotonUnityNetworking.dll:
     - Photon.Pun.PhotonAnimatorView
     - Photon.Pun.PhotonRigidbodyView
@@ -95,31 +93,31 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11212}
+      Script: {instanceID: 11196}
     - Class: 114
-      Script: {instanceID: 11418}
+      Script: {instanceID: 11402}
     - Class: 114
-      Script: {instanceID: 11462}
+      Script: {instanceID: 11446}
     - Class: 114
-      Script: {instanceID: 11674}
+      Script: {instanceID: 11660}
     - Class: 114
-      Script: {instanceID: 11944}
+      Script: {instanceID: 11930}
     - Class: 114
-      Script: {instanceID: 12288}
+      Script: {instanceID: 12276}
     - Class: 114
-      Script: {instanceID: 12420}
+      Script: {instanceID: 12408}
     - Class: 114
-      Script: {instanceID: 12530}
+      Script: {instanceID: 12518}
     - Class: 114
-      Script: {instanceID: 12686}
+      Script: {instanceID: 12674}
     - Class: 114
-      Script: {instanceID: 12930}
+      Script: {instanceID: 12920}
     - Class: 114
-      Script: {instanceID: 13002}
+      Script: {instanceID: 12992}
     - Class: 114
-      Script: {instanceID: 13348}
+      Script: {instanceID: 13340}
     - Class: 114
-      Script: {instanceID: 13434}
+      Script: {instanceID: 13426}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -158,23 +156,23 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11212}
+      Script: {instanceID: 11196}
     - Class: 114
-      Script: {instanceID: 11350}
+      Script: {instanceID: 11334}
     - Class: 114
-      Script: {instanceID: 11462}
+      Script: {instanceID: 11446}
     - Class: 114
-      Script: {instanceID: 11944}
+      Script: {instanceID: 11930}
     - Class: 114
-      Script: {instanceID: 12420}
+      Script: {instanceID: 12408}
     - Class: 114
-      Script: {instanceID: 12686}
+      Script: {instanceID: 12674}
     - Class: 114
-      Script: {instanceID: 12930}
+      Script: {instanceID: 12920}
     - Class: 114
-      Script: {instanceID: 13002}
+      Script: {instanceID: 12992}
     - Class: 114
-      Script: {instanceID: 13434}
+      Script: {instanceID: 13426}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -235,109 +233,107 @@ ScriptsOnlyBuild:
     - Class: 109
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11212}
+      Script: {instanceID: 11196}
     - Class: 114
-      Script: {instanceID: 11234}
+      Script: {instanceID: 11218}
     - Class: 114
-      Script: {instanceID: 11272}
+      Script: {instanceID: 11256}
     - Class: 114
-      Script: {instanceID: 11350}
+      Script: {instanceID: 11334}
     - Class: 114
-      Script: {instanceID: 11360}
+      Script: {instanceID: 11344}
     - Class: 114
-      Script: {instanceID: 11380}
+      Script: {instanceID: 11364}
     - Class: 114
-      Script: {instanceID: 11418}
+      Script: {instanceID: 11402}
     - Class: 114
-      Script: {instanceID: 11462}
+      Script: {instanceID: 11446}
     - Class: 114
-      Script: {instanceID: 11546}
+      Script: {instanceID: 11530}
     - Class: 114
-      Script: {instanceID: 11572}
+      Script: {instanceID: 11556}
     - Class: 114
-      Script: {instanceID: 11602}
+      Script: {instanceID: 11588}
+    - Class: 114
+      Script: {instanceID: 11596}
+    - Class: 114
+      Script: {instanceID: 11604}
     - Class: 114
       Script: {instanceID: 11610}
     - Class: 114
-      Script: {instanceID: 11618}
+      Script: {instanceID: 11740}
     - Class: 114
-      Script: {instanceID: 11624}
+      Script: {instanceID: 11846}
     - Class: 114
-      Script: {instanceID: 11754}
+      Script: {instanceID: 11918}
     - Class: 114
-      Script: {instanceID: 11860}
+      Script: {instanceID: 11930}
     - Class: 114
-      Script: {instanceID: 11932}
+      Script: {instanceID: 11962}
     - Class: 114
-      Script: {instanceID: 11944}
+      Script: {instanceID: 12002}
     - Class: 114
-      Script: {instanceID: 11976}
+      Script: {instanceID: 12154}
     - Class: 114
-      Script: {instanceID: 12016}
+      Script: {instanceID: 12170}
     - Class: 114
-      Script: {instanceID: 12168}
+      Script: {instanceID: 12210}
     - Class: 114
-      Script: {instanceID: 12222}
+      Script: {instanceID: 12276}
     - Class: 114
-      Script: {instanceID: 12288}
+      Script: {instanceID: 12394}
     - Class: 114
-      Script: {instanceID: 12406}
+      Script: {instanceID: 12408}
     - Class: 114
-      Script: {instanceID: 12420}
+      Script: {instanceID: 12434}
     - Class: 114
-      Script: {instanceID: 12446}
+      Script: {instanceID: 12466}
     - Class: 114
-      Script: {instanceID: 12478}
+      Script: {instanceID: 12540}
     - Class: 114
-      Script: {instanceID: 12552}
+      Script: {instanceID: 12620}
     - Class: 114
-      Script: {instanceID: 12632}
+      Script: {instanceID: 12628}
     - Class: 114
       Script: {instanceID: 12640}
     - Class: 114
-      Script: {instanceID: 12652}
+      Script: {instanceID: 12674}
     - Class: 114
-      Script: {instanceID: 12686}
+      Script: {instanceID: 12690}
     - Class: 114
-      Script: {instanceID: 12702}
+      Script: {instanceID: 12764}
     - Class: 114
-      Script: {instanceID: 12776}
+      Script: {instanceID: 12792}
     - Class: 114
-      Script: {instanceID: 12804}
+      Script: {instanceID: 12840}
     - Class: 114
-      Script: {instanceID: 12850}
+      Script: {instanceID: 12858}
     - Class: 114
-      Script: {instanceID: 12868}
+      Script: {instanceID: 12866}
     - Class: 114
-      Script: {instanceID: 12876}
+      Script: {instanceID: 12920}
     - Class: 114
-      Script: {instanceID: 12930}
+      Script: {instanceID: 12992}
     - Class: 114
-      Script: {instanceID: 13002}
+      Script: {instanceID: 13144}
     - Class: 114
-      Script: {instanceID: 13152}
+      Script: {instanceID: 13170}
     - Class: 114
-      Script: {instanceID: 13178}
+      Script: {instanceID: 13308}
     - Class: 114
-      Script: {instanceID: 13226}
+      Script: {instanceID: 13340}
     - Class: 114
-      Script: {instanceID: 13316}
+      Script: {instanceID: 13342}
     - Class: 114
-      Script: {instanceID: 13348}
+      Script: {instanceID: 13364}
     - Class: 114
-      Script: {instanceID: 13350}
+      Script: {instanceID: 13376}
     - Class: 114
-      Script: {instanceID: 13372}
+      Script: {instanceID: 13426}
     - Class: 114
-      Script: {instanceID: 13384}
-    - Class: 114
-      Script: {instanceID: 13434}
+      Script: {instanceID: 13456}
     - Class: 114
       Script: {instanceID: 13464}
-    - Class: 114
-      Script: {instanceID: 13472}
-    - Class: 114
-      Script: {instanceID: 16162}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -977,6 +973,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: First_Down
+  - hash:
+      serializedVersion: 2
+      Hash: 4e0d2c825b987a76ec396f4d7993ec99
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Launcher
   - hash:
       serializedVersion: 2
       Hash: c656dcc13ae391b68d594cc8f9c590b0
@@ -1811,12 +1813,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 4e0d2c825b987a76ec396f4d7993ec99
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Launcher
   platform: 19
   scenePathNames:
   - Assets/StartPage.unity
