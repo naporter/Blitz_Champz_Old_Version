@@ -107,6 +107,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
         else
         {
+            playerStatus.color = Color.red;
             playerStatus.text = "Minimum 2 Players \nrequired to Load Arena!";
         }
     }
