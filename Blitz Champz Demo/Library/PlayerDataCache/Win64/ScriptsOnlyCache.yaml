@@ -35,7 +35,8 @@ ScriptsOnlyBuild:
     - Photon.Pun.Demo.SlotRacer.PlayerControl
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
     PhotonUnityNetworking.Editor.dll:
-    - Photon.Pun.PunSceneSettings
+    - Photon.Pun.PhotonTransformViewEditor
+    - Photon.Pun.PhotonViewInspector
     PhotonUnityNetworking.dll:
     - Photon.Pun.PhotonAnimatorView
     - Photon.Pun.PhotonRigidbodyView
@@ -69,6 +70,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
     - UnityEngine.UI.InputField
+    - UnityEngine.UI.Outline
     - UnityEngine.UI.Shadow
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
@@ -89,6 +91,10 @@ ScriptsOnlyBuild:
     - Class: 65
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -324,6 +330,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13340}
     - Class: 114
       Script: {instanceID: 13342}
+    - Class: 114
+      Script: {instanceID: 13346}
     - Class: 114
       Script: {instanceID: 13364}
     - Class: 114
