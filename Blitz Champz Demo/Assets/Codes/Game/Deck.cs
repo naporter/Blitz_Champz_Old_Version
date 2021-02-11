@@ -7,7 +7,7 @@ using Photon.Realtime;
 using Photon.Pun.Demo.PunBasics;
 
 public class Deck : MonoBehaviour
-{
+{ //This is a test comment
     public List<GameObject> draw_deck;
     public bool ready = false;
     void Start()
